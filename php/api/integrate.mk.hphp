@@ -1,0 +1,12 @@
+<?php
+
+
+$sub_DIRS = [
+];
+
+$common_FILES = [
+  '*.inc'
+];
+
+//$index = 'index.php';
+

@@ -1,0 +1,8 @@
+<?php
+
+
+$sub_DIRS = [
+  'event'
+];
+
+

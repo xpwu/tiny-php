@@ -1,0 +1,10 @@
+<?php
+
+
+$sub_DIRS = [
+  'api',
+  'config',
+  'db',
+  'module'
+];
+

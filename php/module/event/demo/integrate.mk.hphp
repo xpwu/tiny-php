@@ -1,0 +1,11 @@
+<?php
+
+
+$sub_DIRS = [
+];
+
+$common_FILES = [
+  '*.inc'
+];
+
+
