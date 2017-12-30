@@ -21,22 +21,23 @@ class Config {
 // add config after this line
 
 
-const MongoDB_default_addr='';
-const MongoDB_default_dbname='';
-const MongoDB_default_user="";
-const MongoDB_default_passwd="";
+  const MongoDB_default_addr='';
+  const MongoDB_default_dbname='';
+  const MongoDB_default_user="";
+  const MongoDB_default_passwd="";
 
 
-const Timer_collection_name="timer";
-const Event_collection_name="event";
+  const Timer_collection_name="timer";
+  const Event_collection_name="event";
 
 
 
 // ---------------  Logger --------------//
 
 
-const Logger_class_name = ""; // 包括命名空间
-
+  const Logger_class_name = "Base\\Log4php"; // 包括命名空间
+  const Logger_level = 2;  // Logger::INFO
+  const Logger_path = "";
 
 
 
