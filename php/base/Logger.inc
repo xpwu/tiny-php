@@ -25,7 +25,6 @@ abstract class Logger {
   }
 
   function __clone() {
-    // TODO: Implement __clone() method.
     return $this;
   }
 
