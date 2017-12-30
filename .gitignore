@@ -1,2 +1,6 @@
 
 .idea
+
+php/module/event/EventCenterAutoEventData.inc
+
+php/build/AutoLoader.inc

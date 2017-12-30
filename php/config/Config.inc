@@ -27,14 +27,21 @@ const MongoDB_default_user="";
 const MongoDB_default_passwd="";
 
 
-const Timer_collection_name="";
-const Event_collection_name="";
+const Timer_collection_name="timer";
+const Event_collection_name="event";
+
+
+
+// ---------------  Logger --------------//
+
+
+const Logger_class_name = ""; // 包括命名空间
+
+
 
 
 
 // add config before this line
-
-
 
 
 }
