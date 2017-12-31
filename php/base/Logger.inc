@@ -43,7 +43,7 @@ abstract class Logger {
     $this->request = $request;
   }
 
-  abstract public function init();
+  abstract protected function init();
 
   abstract public function trace(string $message, \Throwable $throwable = null);
   abstract public function debug(string $message, \Throwable $throwable = null);
