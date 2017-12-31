@@ -12,12 +12,14 @@ namespace Base;
 //use Throwable;
 
 abstract class Logger {
-  const TRACE = 0;
-  const DEBUG = 1;
-  const INFO = 2;
-  const WARN = 3;
-  const ERROR = 4;
-  const FATAL = 5;
+  const ALL = 0;
+  const TRACE = 1;
+  const DEBUG = 2;
+  const INFO = 3;
+  const WARN = 4;
+  const ERROR = 5;
+  const FATAL = 6;
+  const OFF = 7;
 
   /**
    * @var Logger
@@ -50,5 +52,8 @@ abstract class Logger {
   abstract public function error(string $message, \Throwable $throwable = null);
   abstract public function fatal(string $message, \Throwable $throwable = null);
 
+  /**
+   * @var Request
+   */
   protected $request = null;
 }

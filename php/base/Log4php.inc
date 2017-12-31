@@ -11,6 +11,17 @@ namespace Base;
 
 class Log4php extends Logger {
 
+  const LEVEL_MAP = [
+    "ALL",
+    "TRACE",
+    "DEBUG",
+    "INFO",
+    "WARN",
+    "ERROR",
+    "FATAL",
+    "OFF"
+  ];
+
   public function init() {
     \Logger::configure(array(
       'rootLogger' => array(
@@ -18,7 +29,7 @@ class Log4php extends Logger {
       ),
       'appenders' => array(
         'default' => array(
-          'class' => 'LoggerAppenderFile',
+          'class' => 'LoggerAppenderDailyFile',
           'layout' => array(
             'class' => 'LoggerLayoutPattern',
             'params' => array(
@@ -34,7 +45,7 @@ class Log4php extends Logger {
     ));
 
     $this->logger_ = \Logger::getRootLogger();
-    $this->logger_->setLevel(\LoggerLevel::toLevel(\Config::Logger_level));
+    $this->logger_->setLevel(\LoggerLevel::toLevel(self::LEVEL_MAP[\Config::Logger_level]));
   }
 
   public function trace(string $message, \Throwable $throwable = null) {
@@ -61,8 +72,8 @@ class Log4php extends Logger {
     $this->logger_->fatal($this->format($message), $throwable);
   }
 
-  private function format(string $message) {
-
+  private function format(string $message):string {
+    return "[uid:".$this->request->uid.", api:".$this->request->api."]".$message;
   }
 
   private $logger_;
