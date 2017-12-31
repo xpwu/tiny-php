@@ -4,6 +4,6 @@ set -e
 
 basepath=$(cd `dirname $0`; pwd)
 
-phpinte $1 -l $basepath
+phpinte -l $basepath
 php $basepath/AutoEventDataBuilder.php 
 
