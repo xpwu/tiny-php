@@ -79,9 +79,8 @@ class Event {
       , $handlers2, $handlers3, $handlers4)]];
   }
 
-  public function toAll() {
+  public function toAll():void {
     $this->setIdFactory(new AllEventIdFactory());
-    return $this;
   }
 
   public function handlerError() {}

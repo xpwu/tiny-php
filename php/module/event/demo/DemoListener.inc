@@ -45,7 +45,9 @@ class DemoListenerAutoRegisterAll extends EventCenterAutoRegister {
   protected function listener(): Listener {
     // TODO: Implement listener() method.
 
-    return new DemoListener((new DemoEvent(0))->toAll());
+    $event = new DemoEvent(0);
+    $event->toAll();
+    return new DemoListener($event);
   }
 }
 
