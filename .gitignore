@@ -4,3 +4,11 @@
 php/module/event/EventCenterAutoEventData.inc
 
 php/build/AutoLoader.inc
+
+cli/module
+
+cli/build/cli.phar
+
+cli/build/Config.inc
+
+cli/db

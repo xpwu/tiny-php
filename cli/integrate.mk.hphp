@@ -1,0 +1,14 @@
+<?php
+
+
+$sub_DIRS = [
+  'base',
+  'cli',
+  'db',
+  'module'
+];
+
+$common_FILES = [
+  '*.inc'
+];
+
