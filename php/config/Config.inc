@@ -38,8 +38,7 @@ class Config {
   const Logger_class_name = "Base\\Log4php"; // 包括命名空间
   const Logger_level = 2;  // Logger::INFO
   const Logger_path = "";
-
-
+  
 
 
 // add config before this line

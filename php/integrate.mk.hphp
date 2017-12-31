@@ -3,7 +3,6 @@
 
 $sub_DIRS = [
   'api',
-  'config',
   'db',
   'module',
   'base'
