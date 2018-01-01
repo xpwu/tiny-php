@@ -2,8 +2,7 @@
 
 
 $sub_DIRS = [
-  'php-tiny',
-  'cli'
+
 ];
 
 $common_FILES = [

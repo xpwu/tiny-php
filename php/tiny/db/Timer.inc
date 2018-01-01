@@ -133,6 +133,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
   }
 
   static public function createIndex() {
+    Logger::getInstance()->debug(__CLASS__."::createIndex start");
     $timer = new Timer();
     $cmd = [];
     $cmd['createIndexes'] = $timer->getCol();
@@ -143,13 +144,14 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
       ]
     ];
 
-    $manager = $timer->getManager();
     try {
+      $manager = $timer->getManager();
       $manager->executeCommand($timer->getDB(), new Command($cmd));
     } catch (\Exception $e) {
       Logger::getInstance()->error("Timer.createIndex error!", $e);
       return;
     }
+    Logger::getInstance()->debug(__CLASS__."::createIndex end");
   }
 
   /**
