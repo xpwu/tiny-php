@@ -5,7 +5,7 @@ tiny-php 是一个超级小的php服务器的工程代码结构，它不是一�
 ## php
 服务器代码目录，tiny文件夹是公共的常用库，用户的工程文件放到project文件夹中。
 
-### 事件(Event)
+### <a name="Event"></a>事件(Event)
 采用Event-Listener模式实现事件机制。 
  
 1. Event分类。   
@@ -58,17 +58,17 @@ $event2->toAll();
 6. 定时器事件。    
 php中没有实现定时源，php服务器的特点也不方便产生定时源，另外，定时事件仍可能需要走接入层的负载均衡，因此在tick目录下，实现了定时源，实现原理是定时请求指定的接口。接口中调用`Tiny\Event\EventCenter::default()->postTimerEvent()`把定时器事件通知到所有的监听者。tick的请求周期(单位为s)就是定时器的精度。
 
-### 数据库(Mongodb)<a name="Mongodb"></a>
+### <a name="Mongodb"></a>数据库(Mongodb)
 tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中，工程中可以继承`\Tiny\DB\MongoDB`或者`\Tiny\DB\MongodbDefault`生成一个新的数据库类，MongodbDefault的参数在配置中设定。对于需要建立除`_id`以外的索引时，可以`implements CreateIndexInterface`实现createIndex方法，这样可以方便使用代码自动统一建立索引。
 
 
-### 初始化(ProjectInit)<a name="ProjectInit"></a>
+### <a name="ProjectInit"></a>初始化(ProjectInit)
 工程需要的初始化可以放在`ProjectInit::init()`中，在整个逻辑开始前，这里的代码会得到执行。比如监听器的运行时自动注册即是在此调用；如果工程要换其他日志系统也是在此调用响应的接口(参见[日志](#Logger)部分的说明)。
 
-### 日志(Logger)<a name="Logger"></a>
+### <a name="Logger"></a>日志(Logger)
 tiny在\Tiny\Logger定义了日志的基本接口，在\Tiny\Log4php中实现了log4php的适配，tiny工程默认使用Log4php作为日志的具体处理，使用Log4php需要在配置中正确的设置log4php包的位置。如果在具体的工程中要替换为其他Logger，可以在ProjectInit::init()中调用`Logger::setConcreteLogger($concreteLogger)`。
 
-### 配置(Config)<a name="Config"></a>
+### <a name="Config"></a>配置(Config)
 整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时require_once。
 
 ### 接口(API)
