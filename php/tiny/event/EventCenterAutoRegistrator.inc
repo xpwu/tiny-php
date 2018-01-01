@@ -9,6 +9,8 @@
 namespace Tiny\Event;
 
 
+use Tiny\Logger;
+
 abstract class EventCenterAutoRegistrator {
 
   static public function name() {
@@ -25,6 +27,9 @@ abstract class EventCenterAutoRegistrator {
 
   public function add() {
     $listener = $this->listener();
+    if (!$listener->getEvent()->canAutoRegister()) {
+      throw new \Exception(get_class(!$listener->getEvent())." can not auto register");
+    }
     $eventName = $listener->getEvent()->getId();
     if (!key_exists($eventName, self::$allListeners)) {
       self::$allListeners[$eventName] = [];
@@ -42,7 +47,9 @@ abstract class EventCenterAutoRegistrator {
           $autoRegistrator = new $class();
           $autoRegistrator->add();
         }
-      } catch (\Exception $exception){}
+      } catch (\Exception $exception){
+        Logger::getInstance()->fatal("AutoRegistrator error", $exception);
+      }
     }
   }
 

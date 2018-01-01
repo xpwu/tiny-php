@@ -57,6 +57,10 @@ class Event {
     return $this->idFactory_->getId(get_class($this), $this->argId_);
   }
 
+  public function canAutoRegister():bool {
+    return true;
+  }
+
   protected function setIdFactory(EventIdFactory $eventIdFactory) {
     $this->idFactory_ = $eventIdFactory;
   }

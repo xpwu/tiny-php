@@ -40,6 +40,10 @@ class TimerEvent extends Event {
     return $result;
   }
 
+  public function canAutoRegister():bool {
+    return false;
+  }
+
   public function clone(int $interval_s):TimerEvent {
     $event = new TimerEvent($interval_s);
     $event->timer_ = $this->timer_;
