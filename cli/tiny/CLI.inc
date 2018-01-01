@@ -17,7 +17,14 @@ abstract class CLI {
   /**
    * @param array $argv. argv[0] -> first argv
    */
-  abstract function process(array $argv):void;
+  abstract protected function run(array $argv):void;
+
+  /**
+   * @param array $argv. argv[0] -> first argv
+   */
+  public function process(array $argv):void {
+    $this->run($argv);
+  }
 
   /**
    * php cli.phar <cmd> -h 的返回

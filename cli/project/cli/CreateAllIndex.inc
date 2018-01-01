@@ -16,7 +16,7 @@ class CreateAllIndex extends \Tiny\CLI {
   /**
    * @param array $argv . argv[0] -> first argv
    */
-  function process(array $argv): void {
+  protected function run(array $argv): void {
     /**
      * @var $class \Tiny\DB\CreateIndexInterface
      */
