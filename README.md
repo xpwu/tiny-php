@@ -69,7 +69,16 @@ tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中
 tiny在\Tiny\Logger定义了日志的基本接口，在\Tiny\Log4php中实现了log4php的适配，tiny工程默认使用Log4php作为日志的具体处理，使用Log4php需要在配置中正确的设置log4php包的位置。如果在具体的工程中要替换为其他Logger，可以在ProjectInit::init()中调用`Logger::setConcreteLogger($concreteLogger)`。
 
 ### <a name="Config"></a>配置(Config)
-整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时require_once。
+整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时require_once。在nginx环境中也可以使用如下指令修改auto_prepend_file的值。
+单个值：
+
+```
+fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php";
+```
+多个值(`\n`)分割：
+```
+fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php \n auto_append_file=/home/www/h2.php";
+```
 
 ### 接口(API)
 接口必须继承自\Tiny\API 或者其子类，比如\Tiny\JsonApi(加入了json的编解码)，并实现run方法，子类的命名空间与类名无规定，但是整个完整类名也就是接口名。比如：NS\SubAPI 的类名的接口名就是/NS/SubAPI。接口对应于请求中URI去掉参数的部分，比如：127.0.0.1:10000/MyProject/GetInfo, 会自动调用 MyProject\GetInfo的run方法。   
