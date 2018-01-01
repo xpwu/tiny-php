@@ -22,4 +22,4 @@ $phar_name = __DIR__."/main";
  */
 $mk_name = "integrate.mk.hphp";
 
-$index = 'index.php';
+$index = 'tiny/index.php';
