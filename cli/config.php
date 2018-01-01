@@ -26,8 +26,9 @@ class Config {
   const MongoDB_default_user="";
   const MongoDB_default_passwd="";
 
-
+  // TimerEvent 存储的集合名
   const Timer_collection_name="timer";
+  // 动态Event 存储的集合名
   const Event_collection_name="event";
 
 
