@@ -45,6 +45,8 @@ EOF;
           $clsName = get_class($cli);
           //trim CLI\
           $clsName = substr($clsName, 4);
+          $clsName = explode('\\', $clsName);
+          $clsName = implode('/', $clsName);
           self::tips($clsName."\t".$cli->listInfo().PHP_EOL);
         }
       } catch (Exception $exception){}
@@ -105,7 +107,8 @@ EOF;
       return;
     }
 
-    $cmdName = $argv[0];
+    $cmdName = explode('/', $argv[0]);
+    $cmdName = implode('\\', $cmdName);
     $clsname = "CLI\\".$cmdName;
 
     if (!class_exists($clsname)) {
