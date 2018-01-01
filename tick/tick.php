@@ -100,7 +100,10 @@ while (true) {
   tick($option);
   $end = time();
 
-  sleep($option->interval - ($end-$start));
+  $left = $option->interval - ($end-$start);
+  if ($left > 0) {
+    sleep($left);
+  }
 }
 
 
