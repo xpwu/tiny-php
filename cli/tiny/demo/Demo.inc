@@ -9,9 +9,9 @@
 namespace CLI;
 
 
-use Base\Logger;
+use Tiny\Logger;
 
-class Demo extends CLI {
+class Demo extends \Tiny\CLI {
 
   /**
    * @param array $argv . argv[0] -> first argv
@@ -19,7 +19,6 @@ class Demo extends CLI {
   function process(array $argv): void {
     // TODO: Implement process() method.
     Logger::getInstance()->info($argv[0]);
-    throw new \Exception("test execption");
   }
 
   /**

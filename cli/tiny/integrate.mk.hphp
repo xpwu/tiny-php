@@ -2,11 +2,10 @@
 
 
 $sub_DIRS = [
-  'tiny',
-  'project'
+  'demo'
 ];
 
 $common_FILES = [
-  'ProjectInit.inc'
+  '*.inc'
 ];
 

@@ -6,7 +6,7 @@
  * Time: 下午9:38
  */
 
-namespace Base;
+namespace Tiny;
 
 
 class StdLogger extends Logger {

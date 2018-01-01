@@ -2,6 +2,8 @@
 
 
 $sub_DIRS = [
+  'db',
+  'event'
 ];
 
 $common_FILES = [

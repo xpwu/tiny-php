@@ -1,0 +1,7 @@
+<?php
+
+
+$common_FILES = [
+  '*.inc'
+];
+

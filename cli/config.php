@@ -32,13 +32,6 @@ class Config {
 
 
 
-// ---------------  Logger --------------//
-
-
-  const Logger_class_name = "Base\\StdLogger"; // 包括命名空间
-
-
-
 
 // add config before this line
 

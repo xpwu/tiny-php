@@ -14,7 +14,7 @@ $type = "pro";
 /**
  * default is __DIR__."/main"
  */
-$phar_name = __DIR__."/build/cli";
+$phar_name = __DIR__."/cli";
 
 
 /**
@@ -22,4 +22,4 @@ $phar_name = __DIR__."/build/cli";
  */
 $mk_name = "integrate.mk.hphp";
 
-$index = 'index.php';
+$index = 'tiny/index.php';

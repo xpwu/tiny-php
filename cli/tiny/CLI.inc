@@ -6,7 +6,7 @@
  * Time: 上午11:52
  */
 
-namespace CLI;
+namespace Tiny;
 
 
 abstract class CLI {

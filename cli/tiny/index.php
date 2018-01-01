@@ -1,4 +1,6 @@
 <?php
+use Tiny\Logger;
+
 /**
  * Created by PhpStorm.
  * User: xpwu
@@ -8,7 +10,7 @@
 
 class Option {
   public $force;
-  public $configFile="./Config.inc";
+  public $configFile="./Config.php";
 }
 
 
@@ -24,7 +26,7 @@ usage: php ".$argv[0]. " [-c <filename>, -f, -l, -h] <command> args"
       -l: list all commands;
       -f <command>: force exec <command>;
       <command> -h: show command help;
-      -c <filename>: Config filename, default is './Config.inc'.
+      -c <filename>: Config filename, default is './Config.php'.
 
 EOF;
 
@@ -35,9 +37,9 @@ EOF;
     // phpinte 集成工具生成的中间文件
     foreach (inte_AutoLoader::$classMap_ as $class => $file) {
       try {
-        if (is_subclass_of($class, \CLI\CLI::name())) {
+        if (is_subclass_of($class, \Tiny\CLI::name())) {
           /**
-           * @var \CLI\CLI $cli
+           * @var \Tiny\CLI $cli
            */
           $cli = new $class();
           $clsName = get_class($cli);
@@ -114,7 +116,7 @@ EOF;
     $v = array_slice($argv, 1);
 
     /**
-     * @var \CLI\CLI $cmd
+     * @var \Tiny\CLI $cmd
      */
     $cmd = new $clsname();
     if (count($v) >= 1 && $v[0] == '-h') {
@@ -143,12 +145,16 @@ EOF;
 
     require_once ($option->configFile);
 
-    $logger = \Base\Logger::getInstance();
-    $logger->init();
+    // ------ project init ------
+    ProjectInit::init();
+
+    // -------init logger -----
+    Logger::setConcreteLogger(new \Tiny\StdLogger());
+
     try {
       $cmd->process($v);
     } catch (Exception $e) {
-      $logger->fatal("CLI run error", $e);
+      Logger::getInstance()->fatal("CLI run error", $e);
     }
   }
 }

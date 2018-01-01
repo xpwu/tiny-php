@@ -6,10 +6,8 @@
  * Time: 上午1:59
  */
 
-namespace Base;
+namespace Tiny;
 
-
-//use Throwable;
 
 abstract class Logger {
   const ALL = 0;
@@ -21,16 +19,24 @@ abstract class Logger {
   const FATAL = 6;
   const OFF = 7;
 
+
+  static public function setConcreteLogger(Logger $logger) {
+    Logger::$instance = $logger;
+  }
+  static public function hasSetConcreteLogger():bool {
+    return Logger::$instance !== null;
+  }
   /**
    * @var Logger
    */
-  static private $instance = null;
+  static private $instance= null;
+
+  static private $isInited = false;
 
   static public function getInstance() {
-    if (self::$instance == null) {
-      $className = \Config::Logger_class_name;
-      self::$instance = new $className();
+    if (!self::$isInited) {
       self::$instance->init();
+      self::$isInited = true;
     }
     return self::$instance;
   }
