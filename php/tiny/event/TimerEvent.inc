@@ -40,6 +40,10 @@ class TimerEvent extends Event {
     return $result;
   }
 
+  public function getId(): string {
+    return "TimerEvent:".$this->timer_->getID();
+  }
+
   public function canAutoRegister():bool {
     return false;
   }

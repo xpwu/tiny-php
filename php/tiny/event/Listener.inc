@@ -9,6 +9,8 @@
 namespace Tiny\Event;
 
 
+use Tiny\Logger;
+
 abstract class Listener {
   function __construct(Event $event) {
     $this->event_ = $event;
@@ -28,9 +30,15 @@ abstract class Listener {
     try {
       $this->handler();
     } catch (\Exception $e) {
+      Logger::getInstance()->error($this->event_->getId()
+        ."+".Listener::getClassSign()." error!", $e);
+
       $this->event_->handlerError();
       return;
     }
+    Logger::getInstance()->debug($this->event_->getId()
+      ."+".Listener::getClassSign()." success!");
+
     $this->event_->handlerOver();
   }
 

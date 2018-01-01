@@ -9,6 +9,8 @@
 namespace Tiny\Event;
 
 
+use Tiny\Logger;
+
 class EventCenter {
 
   static public function default() {
@@ -24,6 +26,7 @@ class EventCenter {
   }
 
   public function postEvent(Event $event) {
+    Logger::getInstance()->debug("postEvent: ". $event->getId());
     /**
      * @var $handlers array[['event'=>Event, 'handlers'=>[]], ...]
      */
@@ -31,6 +34,9 @@ class EventCenter {
 
     foreach ($event_handlers as $event_handler) {
       foreach ($event_handler['handlers'] as $handler) {
+        Logger::getInstance()->debug("postEvent response: Event("
+          .$event_handler['event']->getId()
+          .")--->Listener(".$handler.")");
         $listener = Listener::New($handler, $event_handler['event']);
         $listener->process();
       }

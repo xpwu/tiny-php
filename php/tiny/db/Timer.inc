@@ -13,6 +13,7 @@ use MongoDB\BSON\ObjectID;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Command;
 use MongoDB\Driver\Query;
+use Tiny\Logger;
 
 class Timer extends MongodbDefault implements CreateIndexInterface {
 
@@ -127,6 +128,10 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
     return $this->handler_;
   }
 
+  public function getID():string {
+    return $this->id_.":".$this->timestamp_;
+  }
+
   static public function createIndex() {
     $timer = new Timer();
     $cmd = [];
@@ -142,11 +147,14 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
     try {
       $manager->executeCommand($timer->getDB(), new Command($cmd));
     } catch (\Exception $e) {
-//      $timer->logger()->error("Timer.InitDB error!", $e);
+      Logger::getInstance()->error("Timer.createIndex error!", $e);
       return;
     }
   }
 
+  /**
+   * @var string
+   */
   private $id_;
   private $handler_;
   private $timestamp_; // unit: s
