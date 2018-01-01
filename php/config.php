@@ -28,11 +28,12 @@ class Config {
 
 // ---------------  Logger --------------//
 
-  const Logger_level = 2;  // Logger::INFO
+  const Logger_level =  \Tiny\Logger::INFO;  // Logger::INFO
   const Logger_path = "";
 
   // 如果使用 tiny提供的Log4php logger，需要配置以下项
   //Log4php Logger类文件位置，要确定require_once能成功
+  // 如果不使用log4php 可以不配置此项
   const Logger_log4php_class_file = "";
 
 
