@@ -9,6 +9,7 @@
 namespace CLI;
 
 
+use Tiny\Logger;
 use Tiny\Phpinte;
 
 class CreateAllIndex extends \Tiny\CLI {
@@ -26,7 +27,9 @@ class CreateAllIndex extends \Tiny\CLI {
           \Tiny\Logger::getInstance()->info("create index: ".$class);
           $class::createIndex();
         }
-      } catch (\Exception $exception){}
+      } catch (\Exception $exception){
+        Logger::getInstance()->fatal("create index error: ".$class, $exception);
+      }
     }
   }
 
