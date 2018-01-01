@@ -12,3 +12,11 @@ cli/build/cli.phar
 cli/build/Config.inc
 
 cli/db
+
+php/main.phar
+
+php/tiny/event/EventCenterAutoEventData.inc
+
+php/tiny/build/AutoLoader.inc
+
+cli/cli.phar
