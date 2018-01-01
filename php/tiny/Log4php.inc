@@ -37,7 +37,7 @@ class Log4php extends Logger {
             )
           ),
           'params' => array(
-            'file' => \Config::Logger_path,
+            'file' => \Config\Logger::path,
             'append' => true
           )
         )
@@ -45,7 +45,7 @@ class Log4php extends Logger {
     ));
 
     $this->logger_ = \Logger::getRootLogger();
-    $this->logger_->setLevel(\LoggerLevel::toLevel(self::LEVEL_MAP[\Config::Logger_level]));
+    $this->logger_->setLevel(\LoggerLevel::toLevel(self::LEVEL_MAP[\Config\Logger::level]));
   }
 
   public function trace(string $message, \Throwable $throwable = null) {

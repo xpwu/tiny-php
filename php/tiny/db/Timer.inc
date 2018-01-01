@@ -24,7 +24,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
 
 
   function __construct(string $id = null) {
-    parent::__construct(\Config::Timer_collection_name);
+    parent::__construct(\Config\MongoDB::Timer_collection_name);
 
     if ($id === null) {
       $id = new ObjectID();

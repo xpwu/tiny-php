@@ -18,7 +18,7 @@ class EventData extends MongodbDefault {
   const data = "data";
 
   function __construct(string $name) {
-    parent::__construct(\Config::Event_collection_name);
+    parent::__construct(\Config\MongoDB::Event_collection_name);
 
     $this->name_ = $name;
   }

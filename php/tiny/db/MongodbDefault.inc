@@ -12,9 +12,9 @@ namespace Tiny\DB;
 class MongodbDefault extends MongoDB {
   function __construct($collection) {
     parent::__construct($collection
-      , \Config::MongoDB_default_dbname
-      , \Config::MongoDB_default_addr
-      , \Config::MongoDB_default_user
-      , \Config::MongoDB_default_passwd);
+      , \Config\MongoDB::default_dbname
+      , \Config\MongoDB::default_addr
+      , \Config\MongoDB::default_user
+      , \Config\MongoDB::default_passwd);
   }
 }

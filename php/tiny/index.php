@@ -25,7 +25,7 @@ class Index {
 
     // -------init logger -----
     if (!Logger::hasSetConcreteLogger()) {
-      require_once (Config::Logger_log4php_class_file);
+      require_once (\Config\Logger::log4php_class_file);
       Logger::setConcreteLogger(new \Tiny\Log4php());
     }
 
