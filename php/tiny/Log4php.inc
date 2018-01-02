@@ -33,7 +33,7 @@ class Log4php extends Logger {
           'layout' => array(
             'class' => 'LoggerLayoutPattern',
             'params' => array(
-              'conversionPattern' => '%date{Y-m-d H:i:s,u} [%5pid] %C.%M(...%.-25F:%L) %level --- %m%n%ex'
+              'conversionPattern' => '%date{Y-m-d H:i:s,u} [%5pid] %level %m%n%ex'
             )
           ),
           'params' => array(
@@ -73,7 +73,9 @@ class Log4php extends Logger {
   }
 
   private function format(string $message):string {
-    return "[uid:".$this->request->uid.", api:".$this->request->api."]".$message;
+    $this->getLocationInformation();
+    return $this->fullInfo."[uid:".$this->request->uid
+      .", api:".$this->request->api."] --- ".$message;
   }
 
   private $logger_;

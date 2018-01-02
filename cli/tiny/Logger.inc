@@ -58,8 +58,55 @@ abstract class Logger {
   abstract public function error(string $message, \Throwable $throwable = null);
   abstract public function fatal(string $message, \Throwable $throwable = null);
 
+  protected function getLocationInformation() {
+
+    $trace = debug_backtrace();
+    $prevHop = null;
+    // make a downsearch to identify the caller
+    $hop = array_pop($trace);
+    while($hop !== null) {
+      if(isset($hop['class'])) {
+        // we are sometimes in functions = no class available: avoid php warning here
+        $className = $hop['class'];
+        if(!empty($className) && ($className == get_class() ||
+            is_subclass_of($className, get_class()) )) {
+          $this->line = $hop['line'];
+          $this->fileName = $hop['file'];
+          break;
+        }
+      }
+      $prevHop = $hop;
+      $hop = array_pop($trace);
+    }
+    $this->className = isset($prevHop['class']) ? $prevHop['class'] : 'main';
+    if(isset($prevHop['function']) and
+      $prevHop['function'] !== 'include' and
+      $prevHop['function'] !== 'include_once' and
+      $prevHop['function'] !== 'require' and
+      $prevHop['function'] !== 'require_once') {
+
+      $this->methodName = $prevHop['function'];
+    } else {
+      $this->methodName = 'main';
+    }
+
+    $this->fullInfo = $this->className . '.' . $this->methodName .
+      '(...' . substr($this->fileName, -25) . ':' . $this->line . ')';
+  }
+
+  protected function getDate():string {
+    $millTime = ((int)(microtime(true)*1000))%1000;
+    return date("Y-m-d H:i:s").",".$millTime;
+  }
+
   /**
    * @var Request
    */
   protected $request = null;
+
+  protected $line = null;
+  protected $fileName = null;
+  protected $methodName = null;
+  protected $className = null;
+  protected $fullInfo = null;
 }

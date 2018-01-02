@@ -58,28 +58,30 @@ class StdLogger extends Logger {
   public function warn(string $message, \Throwable $throwable = null) {
     $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
-      , self::YELLOW.date("Y-m-d H:i:s")."[ WARN] ".$message
+      , self::YELLOW.$this->getDate()."[ WARN] ".$this->fullInfo."---".$message
       ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
   }
 
   public function error(string $message, \Throwable $throwable = null) {
     $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
-      , self::RED.date("Y-m-d H:i:s")."[ERROR] ".$message
+      , self::RED.$this->getDate()."[ERROR] ".$this->fullInfo."---".$message
       ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
   }
 
   public function fatal(string $message, \Throwable $throwable = null) {
     $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
-      , self::RED.date("Y-m-d H:i:s")."[FATAL] ".$message
+      , self::RED.$this->getDate()."[FATAL] ".$this->fullInfo."---".$message
       ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
   }
 
   private function format(string $type, string $message, \Throwable $throwable=null) {
+    $this->getLocationInformation();
+
     $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
-      , date("Y-m-d H:i:s")."[$type] ".$message
+      , $this->getDate()."[$type]".$this->fullInfo."---".$message
       ." ".$throwa. PHP_EOL);
   }
 }
