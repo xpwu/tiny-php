@@ -21,7 +21,7 @@ abstract class Listener {
   }
 
   static public function New(string $classSign, Event $event):Listener {
-    return $classSign($event);
+    return new $classSign($event);
   }
 
   abstract protected function handler();
