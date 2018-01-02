@@ -75,7 +75,7 @@ abstract class EventCenterAutoRegistrator {
 namespace Tiny\Event;
 
 /*
- * ------Auto Created By EventCenterAutoRegister, DO NOT modify this file------
+ * ------Auto Created By EventCenterAutoRegistrator, DO NOT modify this file------
 */
 
 class EventCenterAutoEventData {
