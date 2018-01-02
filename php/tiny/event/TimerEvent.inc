@@ -11,11 +11,12 @@ namespace Tiny\Event;
 use Tiny\DB\Timer;
 
 class TimerEvent extends Event {
-  function __construct(int $interval_s, string $unionID=null) {
+  function __construct(int $interval_s, array $context, string $unionID=null) {
     parent::__construct("");
 
     $this->interval_ = $interval_s;
     $this->timer_ = new Timer($unionID);
+    $this->context_ = $context;
   }
 
   /**
@@ -30,8 +31,9 @@ class TimerEvent extends Event {
      * @var $timer Timer
      */
     foreach ($timers as $timer) {
-      $timerEvent = new TimerEvent($this->interval_);
-      $timerEvent->timer_ = $timer;
+      $timerEvent = new TimerEvent($timer->getInterval()
+        , json_decode($timer->getContext(), true)
+        , $timer->getID());
       $timerEvent->runningTimestamp_ = $now;
 
       $result[] = ['event'=>$timerEvent, 'handlers'=>[$timer->getHandler()]];
@@ -48,15 +50,17 @@ class TimerEvent extends Event {
     return false;
   }
 
-  public function clone(int $interval_s):TimerEvent {
-    $event = new TimerEvent($interval_s);
-    $event->timer_ = $this->timer_;
-    return $event;
-  }
+//  public function clone(int $interval_s):TimerEvent {
+//    $event = new TimerEvent($interval_s);
+//    $event->timer_ = $this->timer_;
+//    return $event;
+//  }
 
   public function addHandler(string $handler) {
     $now = time();
-    $this->timer_->set($this->interval_ + $now, $handler);
+    $this->timer_->set($this->interval_ + $now
+      , $handler, $this->interval_
+      , json_encode($this->context_));
   }
 
   public function removeHandler(string $handler) {
@@ -71,8 +75,13 @@ class TimerEvent extends Event {
     $this->timer_->delIfBefore($this->runningTimestamp_);
   }
 
+  public function getContext():array  {
+    return $this->context_;
+  }
+
   private $interval_;
   private $timer_;
   private $runningTimestamp_;
+  private $context_;
 }
 
