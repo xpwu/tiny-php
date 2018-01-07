@@ -71,13 +71,14 @@ tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中
 tiny在\Tiny\Logger定义了日志的基本接口，在\Tiny\Log4php中实现了log4php的适配，tiny工程默认使用Log4php作为日志的具体处理，使用Log4php需要在配置中正确的设置log4php包的位置。如果在具体的工程中要替换为其他Logger，可以在ProjectInit::init()中调用`Logger::setConcreteLogger($concreteLogger)`。
 
 ### <a name="Config"></a>配置(Config)
-整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时require_once。在nginx环境中也可以使用如下指令修改auto_prepend_file的值。
+整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时`require_once`。在nginx环境中也可以使用如下指令修改`auto_prepend_file`的值。
 单个值：
 
 ```
 fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php";
 ```
 多个值(`\n`)分割：
+
 ```
 fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php \n auto_append_file=/home/www/h2.php";
 ```
@@ -87,6 +88,8 @@ fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php \n auto_append_file=
 \Tiny\API还有两个辅助方法：beforeRun afterRun，可在run执行的前后做一些处理，比如JsonApi 就用于编解码工作。   
 API的请求参数用Request对象传递，其中data就是POST的数据；处理的结果使用Response传递，其中的data就是返回的数据。
 
+### 错误日志   
+错误日志的位置在php.ini的`error_log`项目配置，如果没有配置此项，默认为phar同级的error.log文件。
 
 ### project
 实际工程的代码放置于此文件夹下，建立代码组织方式为：   
