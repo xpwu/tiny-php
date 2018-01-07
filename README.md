@@ -57,7 +57,8 @@ $event2->toAll();
 普通事件一般由其他某个操作引起，事件生成后，使用`Tiny\Event\EventCenter::default()->postEvent($event)`把事件通知到所有的监听者。   
 6. 定时器事件。    
 php中没有实现定时源，php服务器的特点也不方便产生定时源，另外，定时事件仍可能需要走接入层的负载均衡，因此在tick目录下，实现了定时源，实现原理是定时请求指定的接口。接口中调用`Tiny\Event\EventCenter::default()->postTimerEvent()`把定时器事件通知到所有的监听者。tick的请求周期(单位为s)就是定时器的精度。   
-TimerEvent中的context可以保留定时事件执行的上下文数据，传入的array必须保证json_encode成功。
+TimerEvent中的context可以保留定时事件执行的上下文数据，传入的array必须保证json_encode成功。   
+定时器事件的type参数可以把TimerEvent分类，方便timer数据库的管理，具体使用时建议使用子类的方式。
 
 ### <a name="Mongodb"></a>数据库(Mongodb)
 tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中，工程中可以继承`\Tiny\DB\MongoDB`或者`\Tiny\DB\MongodbDefault`生成一个新的数据库类，MongodbDefault的参数在配置中设定。对于需要建立除`_id`以外的索引时，可以`implements CreateIndexInterface`实现createIndex方法，这样可以方便使用代码自动统一建立索引。
@@ -85,6 +86,15 @@ fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php \n auto_append_file=
 接口必须继承自\Tiny\API 或者其子类，比如\Tiny\JsonApi(加入了json的编解码)，并实现run方法，子类的命名空间与类名无规定，但是整个完整类名也就是接口名。比如：NS\SubAPI 的类名的接口名就是/NS/SubAPI。接口对应于请求中URI去掉参数的部分，比如：127.0.0.1:10000/MyProject/GetInfo, 会自动调用 MyProject\GetInfo的run方法。   
 \Tiny\API还有两个辅助方法：beforeRun afterRun，可在run执行的前后做一些处理，比如JsonApi 就用于编解码工作。   
 API的请求参数用Request对象传递，其中data就是POST的数据；处理的结果使用Response传递，其中的data就是返回的数据。
+
+
+### project
+实际工程的代码放置于此文件夹下，建立代码组织方式为：   
+
+1. api：放所有的接口代码，也就是所有继承于 \Tiny\API的类均放置于此文件夹中，api中的代码可以调用module与db中的接口，api之间不能相互调用，api最主要的目的是验证用户的输入；
+2. event：存放所有的事件类，也就是所有继承于 \Tiny\Event的类均放置于此文件夹中，事件的使用方一般是api与module；
+3. module：存放公共模块，相对独立的逻辑，每个系统的公共逻辑均放于Module中，module之间可以相互调用，modulek可以调用db层代码。
+4. db：数据库接口层，所有数据库的原始接口均封装于此层，db了调用数据库自己的访问接口外，不能调用其他接口，db之间不能相互调用，一般情况一个Mongodb的集合或者一张sql的表就对应db层中的一个类。
 
 ## cli
 命令行执行工具，可以方便实现数据库管理的操作或者运维的操作。由于cli执行的命令大多需要调用php服务器中的接口，所以在实际项目中可以直接使用软链接实现。   
