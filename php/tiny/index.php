@@ -15,6 +15,14 @@ class Index {
 
     date_default_timezone_set('PRC'); // 设置时区
 
+    ini_set('display_errors','Off');
+    error_reporting(E_ALL);
+    ini_set('log_errors', 'On');
+    $errlog = ini_get("error_log");
+    if ($errlog == "" || $errlog == false) {
+      ini_set('error_log', "error.log");
+    }
+
     function exception_error_handler($errno, $errstr, $errfile, $errline ) {
       throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
     }
@@ -29,42 +37,42 @@ class Index {
       Logger::setConcreteLogger(new \Tiny\Log4php());
     }
 
-    // ----- request -----
-
-    $request = new Tiny\Request();
-    Logger::getInstance()->setRequest($request);
-
-    $request->api = explode('?', $_SERVER["REQUEST_URI"]);
-    $request->api = explode('/', $request->api[0]);
-    if (count($request->api) > 0 && $request->api[0] == '') {
-      array_shift($request->api);
-    }
-    $request->api = implode('\\', $request->api);
-    $request->data = file_get_contents("php://input");
-    $request->httpHeaders = $_SERVER;
-    $request->uid = "";
-
-    // ----- api -----
     $response = new Tiny\Response();
     unset($response->data);
+    try {
+      // ----- request -----
+      $request = new Tiny\Request();
+      Logger::getInstance()->setRequest($request);
 
-    Logger::getInstance()->info("start");
-
-    if (!class_exists($request->api)) {
-      $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
-      $response->httpStatusMsg = "API Not Found";
-    } else {
-      try {
-        /**
-         * @var $api Tiny\API
-         */
-        $api = new ($request->api)();
-        $api->process($request, $response);
-      } catch (Exception $e) {
-        $response->httpStatus = \Tiny\HttpStatus::FAILED;
-        $response->httpStatusMsg = "PHP Run Error";
-        Logger::getInstance()->fatal("500 PHP Run Error", $e);
+      $request->api = explode('?', $_SERVER["REQUEST_URI"]);
+      $api = explode('/', $request->api[0]);
+      if (count($api) > 0 && $api[0] == '') {
+        array_shift($api);
       }
+      $request->api = implode('/', $api);
+      $api = implode('\\', $api);
+      $request->data = file_get_contents("php://input");
+      $request->httpHeaders = $_SERVER;
+      $request->uid = "";
+
+      // ----- api -----
+
+      Logger::getInstance()->info("start");
+
+      if (!class_exists($api)) {
+        $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
+        $response->httpStatusMsg = "API Not Found";
+      } else {
+          /**
+           * @var $api Tiny\API
+           */
+          $api = new $api;
+          $api->process($request, $response);
+      }
+    } catch (Exception $e) {
+      $response->httpStatus = \Tiny\HttpStatus::FAILED;
+      $response->httpStatusMsg = "PHP Run Error";
+      Logger::getInstance()->fatal("500 PHP Run Error", $e);
     }
 
     // ------ response -------

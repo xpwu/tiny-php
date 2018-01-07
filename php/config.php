@@ -32,7 +32,6 @@ class MongoDB {
 
 class Logger {
   const level =  \Tiny\Logger::INFO;
-  const path = "";
 
   // 如果使用 tiny提供的Log4php logger，需要配置以下项
   //Log4php Logger类文件位置，要确定require_once能成功
