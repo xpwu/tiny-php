@@ -11,12 +11,13 @@ namespace Tiny\Event;
 use Tiny\DB\Timer;
 
 class TimerEvent extends Event {
-  function __construct(int $interval_s, array $context, string $unionID=null) {
+  function __construct(int $interval_s, array $context, string $type, string $unionID=null) {
     parent::__construct("");
 
     $this->interval_ = $interval_s;
     $this->timer_ = new Timer($unionID);
     $this->context_ = $context;
+    $this->type_ = $type;
   }
 
   /**
@@ -59,8 +60,10 @@ class TimerEvent extends Event {
   public function addHandler(string $handler) {
     $now = time();
     $this->timer_->set($this->interval_ + $now
-      , $handler, $this->interval_
-      , json_encode($this->context_));
+      , $handler
+      , json_encode($this->context_)
+      , $this->interval_
+      , $this->type_);
   }
 
   public function removeHandler(string $handler) {
@@ -83,5 +86,6 @@ class TimerEvent extends Event {
   private $timer_;
   private $runningTimestamp_;
   private $context_;
+  private $type_;
 }
 

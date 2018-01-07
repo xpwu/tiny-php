@@ -23,6 +23,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
   const retry = "retry";
   const context = "context";
   const interval = "interval";
+  const type = "type";
 
 
   function __construct(string $id = null) {
@@ -56,6 +57,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
       $timer->interval_ = $item->{self::interval};
       $timer->retry_ = $item->{self::retry};
       $timer->context_ = $item->{self::context};
+      $timer->type_ = $item->{self::type};
 
       $result[] = $timer;
     }
@@ -74,7 +76,10 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
     $this->retry_ ++;
   }
 
-  public function set(int $timestamp_s, string $handler, string $context, int $interval_s) {
+  public function set(int $timestamp_s, string $handler
+    , string $context, int $interval_s, string $type) {
+
+    $this->type_ = $type;
     $this->handler_ = $handler;
     $this->timestamp_ = $timestamp_s;
     $this->retry_ = 0;
@@ -88,6 +93,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
       , self::retry=>$this->retry_
       , self::context=>$this->context_
       , self::interval=>$this->interval_
+      , self::type=>$this->type_
     ];
 
     $bulk = new BulkWrite();
@@ -177,4 +183,5 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
   private $retry_;
   private $context_;
   private $interval_;
+  private $type_;
 }
