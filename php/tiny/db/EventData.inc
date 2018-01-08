@@ -53,6 +53,9 @@ class EventData extends MongodbDefault {
 
     $cursor = $manager->executeQuery($this->getNs(), new Query($filter));
     $result = $cursor->toArray();
+    if (count($result) == 0) {
+      return [];
+    }
     return $result[0]->{self::data};
   }
 
