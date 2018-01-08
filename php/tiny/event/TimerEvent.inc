@@ -10,8 +10,8 @@ namespace Tiny\Event;
 
 use Tiny\DB\Timer;
 
-class TimerEvent extends Event {
-  function __construct(int $interval_s, array $context, string $type, string $unionID=null) {
+final class TimerEvent extends Event {
+  function __construct(int $interval_s, array $context, string $type="", string $unionID=null) {
     parent::__construct("");
 
     $this->interval_ = $interval_s;
@@ -34,6 +34,7 @@ class TimerEvent extends Event {
     foreach ($timers as $timer) {
       $timerEvent = new TimerEvent($timer->getInterval()
         , json_decode($timer->getContext(), true)
+        , $timer->getType()
         , $timer->getID());
       $timerEvent->runningTimestamp_ = $now;
 

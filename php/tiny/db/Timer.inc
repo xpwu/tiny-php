@@ -19,7 +19,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
 
   const ID = "_id";
   const TimeStamp = "timestamp";
-  const handler = 'api';
+  const handler = 'listener';
   const retry = "retry";
   const context = "context";
   const interval = "interval";
@@ -58,6 +58,8 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
       $timer->retry_ = $item->{self::retry};
       $timer->context_ = $item->{self::context};
       $timer->type_ = $item->{self::type};
+
+      Logger::getInstance()->debug(json_encode($item));
 
       $result[] = $timer;
     }
@@ -122,6 +124,7 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
     } catch (\Exception $e) {
       Logger::getInstance()->fatal("timer delIfBefore error", $e);
     }
+    Logger::getInstance()->debug("delIfBefore success-->".$this->getID());
   }
 
   static public function delAllBefore(int $timestamp_s) {
@@ -149,7 +152,11 @@ class Timer extends MongodbDefault implements CreateIndexInterface {
   }
 
   public function getID():string {
-    return $this->id_.":".$this->timestamp_;
+    return $this->id_;
+  }
+
+  public function getType():string {
+    return $this->type_;
   }
 
   static public function createIndex() {

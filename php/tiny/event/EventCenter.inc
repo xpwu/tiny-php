@@ -26,7 +26,6 @@ class EventCenter {
   }
 
   public function postEvent(Event $event) {
-    Logger::getInstance()->debug("postEvent: ". $event->getId());
     /**
      * @var $handlers array[['event'=>Event, 'handlers'=>[]], ...]
      */
@@ -44,7 +43,7 @@ class EventCenter {
   }
 
   public function postTimerEvent() {
-    $this->postEvent(new TimerEvent(0));
+    $this->postEvent(new TimerEvent(0, [], ""));
   }
 
 }

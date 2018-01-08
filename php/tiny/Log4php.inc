@@ -37,7 +37,7 @@ class Log4php extends Logger {
             )
           ),
           'params' => array(
-            'file' => \Config\Logger::path,
+            'file' => ini_get("error_log"),
             'append' => true
           )
         )
