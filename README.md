@@ -57,8 +57,7 @@ $event2->toAll();
 普通事件一般由其他某个操作引起，事件生成后，使用`Tiny\Event\EventCenter::default()->postEvent($event)`把事件通知到所有的监听者。   
 6. 定时器事件。    
 php中没有实现定时源，php服务器的特点也不方便产生定时源，另外，定时事件仍可能需要走接入层的负载均衡，因此在tick目录下，实现了定时源，实现原理是定时请求指定的接口。接口中调用`Tiny\Event\EventCenter::default()->postTimerEvent()`把定时器事件通知到所有的监听者。tick的请求周期(单位为s)就是定时器的精度。   
-TimerEvent中的context可以保留定时事件执行的上下文数据，传入的array必须保证json_encode成功。   
-定时器事件的type参数可以把TimerEvent分类，方便timer数据库的管理，具体使用时建议使用子类的方式。
+TimerEvent中的context可以保留定时事件执行的上下文数据，传入的array必须保证json_encode能执行成功。定时器事件的type参数可以把TimerEvent分类，方便timer数据库的管理。
 
 ### <a name="Mongodb"></a>数据库(Mongodb)
 tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中，工程中可以继承`\Tiny\DB\MongoDB`或者`\Tiny\DB\MongodbDefault`生成一个新的数据库类，MongodbDefault的参数在配置中设定。对于需要建立除`_id`以外的索引时，可以`implements CreateIndexInterface`实现createIndex方法，这样可以方便使用代码自动统一建立索引。
