@@ -28,6 +28,18 @@ class Index {
     }
     set_error_handler("exception_error_handler");
 
+    spl_autoload_register(function ($class) {
+      if (array_key_exists($class, ProjectInit::$_3rdClassLoader)) {
+        require_once (ProjectInit::$_3rdClassLoader[$class]);
+        return true;
+      }
+      return false;
+    });
+
+    foreach (ProjectInit::$_3rdRequireOnce as $item) {
+      require_once ($item);
+    }
+
     // ------ project init ------
     ProjectInit::init();
 

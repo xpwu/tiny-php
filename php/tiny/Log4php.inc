@@ -78,6 +78,9 @@ class Log4php extends Logger {
       .", api:".$this->request->api."] --- ".$message;
   }
 
+  /**
+   * @var \Logger
+   */
   private $logger_;
 
 }

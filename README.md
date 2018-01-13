@@ -64,14 +64,15 @@ tiny工程中使用Mongodb数据库，Event 与 TimerEvent均存储在Mongodb中
 
 
 ### <a name="ProjectInit"></a>初始化(ProjectInit)
-工程需要的初始化可以放在`ProjectInit::init()`中，在整个逻辑开始前，这里的代码会得到执行。比如监听器的运行时自动注册即是在此调用；如果工程要换其他日志系统也是在此调用响应的接口(参见[日志](#Logger)部分的说明)。
+工程需要的初始化可以放在`ProjectInit::init()`中，在整个逻辑开始前，这里的代码会得到执行。比如监听器的运行时自动注册即是在此调用；如果工程要换其他日志系统也是在此调用响应的接口(参见[日志](#Logger)部分的说明)。   
+`ProjectInit::$_3rdClassLoader`可以添加第三方类的加载，`ProjectInit::$_3rdRequireOnce`可以添加需要require的第三方文件，两者的区别就是`_3rdClassLoader`使用惰性加载。   
+**特别说明** 这里的第三方加载方式和[phpinte](https://github.com/xpwu/php-integrate)类似，区别是：ProjectInit中的文件可以使用[配置](#Config)中的常量；而phpinte不能使用。
 
 ### <a name="Logger"></a>日志(Logger)
 tiny在\Tiny\Logger定义了日志的基本接口，在\Tiny\Log4php中实现了log4php的适配，tiny工程默认使用Log4php作为日志的具体处理，使用Log4php需要在配置中正确的设置log4php包的位置。如果在具体的工程中要替换为其他Logger，可以在ProjectInit::init()中调用`Logger::setConcreteLogger($concreteLogger)`。
 
 ### <a name="Config"></a>配置(Config)
-整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载可以在php.ini中配置为auto_prepend_file的参数，或者在[初始化](#ProjectInit)时`require_once`。在nginx环境中也可以使用如下指令修改`auto_prepend_file`的值。
-单个值：
+整个工程的配置在config.php文件中，使用php类常量的方式设定。此文件的加载需要在php.ini中配置为`auto_prepend_file`的参数。php-fpm在启动时也可以使用-d参数修改`auto_prepend_file`的值。在nginx环境中也可以使用如下指令修改`auto_prepend_file`的值。单个值：
 
 ```
 fastcgi_param PHP_VALUE "auto_prepend_file=/home/www/h1.php";
