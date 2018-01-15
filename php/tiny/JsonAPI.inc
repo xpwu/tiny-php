@@ -28,9 +28,11 @@ abstract class JsonAPI extends API {
   }
 
   protected function afterRun(Request $request, Response $response) {
-    if (isset($response->data) && $response->data !== null) {
-      $response->data = json_encode($response->data);
+    if (!isset($response->data) || $response->data === null) {
+      return;
     }
+
+    $response->data = json_encode($response->data);
 
     if ($response->data === false) {
       unset($response->data);
