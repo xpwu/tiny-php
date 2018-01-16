@@ -10,7 +10,7 @@ use Tiny\Logger;
 
 class Option {
   public $force;
-  public $configFile="./Config.php";
+  public $configFile="./config.php";
 }
 
 
@@ -26,7 +26,7 @@ usage: php ".$argv[0]. " [-c <filename>, -f, -l, -h] <command> args"
       -l: list all commands;
       -f <command>: force exec <command>;
       <command> -h: show command help;
-      -c <filename>: Config filename, default is './Config.php'.
+      -c <filename>: config filename, default is './config.php'.
 
 EOF;
 
