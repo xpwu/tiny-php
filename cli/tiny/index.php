@@ -94,10 +94,10 @@ EOF;
 
     date_default_timezone_set('PRC'); // 设置时区
 
-    function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-       throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    }
-    set_error_handler("exception_error_handler");
+//    function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+//       throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+//    }
+//    set_error_handler("exception_error_handler");
 
     $argv = $_SERVER['argv'];
     $option = new Option();
@@ -157,6 +157,8 @@ EOF;
     try {
       $cmd->process($v);
     } catch (Exception $e) {
+      Logger::getInstance()->fatal("CLI run error", $e);
+    } catch (Error $e) {
       Logger::getInstance()->fatal("CLI run error", $e);
     }
   }
