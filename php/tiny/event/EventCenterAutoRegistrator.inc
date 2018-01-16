@@ -53,6 +53,36 @@ abstract class EventCenterAutoRegistrator {
     }
   }
 
+  static public function registerAllListenerWithPcntl() {
+    foreach (\inte_AutoLoader::$classMap_ as $class => $file) {
+      $pid = pcntl_fork();
+      switch ($pid) {
+        case -1: break;
+        case 0 : {
+          error_reporting(0);
+          // 测试是否能正常加载$class，因为可能配置文件没有加载，造成部分类不能正常加载
+          // 不能加载的类，按照目前的设计，肯定不是此类的子类
+          is_subclass_of($class, self::name());
+          exit(0);
+        }
+        default : {
+          pcntl_waitpid($pid, $status);
+          if (!pcntl_wifexited($status) || pcntl_wexitstatus($status)) {
+            break;
+          }
+
+          if (is_subclass_of($class, self::name())) {
+            /**
+             * @var \Tiny\Event\EventCenterAutoRegistrator $autoRegistrator
+             */
+            $autoRegistrator = new $class();
+            $autoRegistrator->add();
+          }
+        }
+      }
+    }
+  }
+
   static public function getHandlers(string $eventID) {
     // use registerAllListener
     if (array_key_exists($eventID, self::$allListeners)) {

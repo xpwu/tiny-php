@@ -17,6 +17,6 @@ require_once("AutoLoader.inc");
 inte_AutoLoader::$prefixDir = dirname(__FILE__)."/../..";
 inte_AutoLoader::run();
 
-\Tiny\Event\EventCenterAutoRegistrator::registerAllListener();
+\Tiny\Event\EventCenterAutoRegistrator::registerAllListenerWithPcntl();
 
 \Tiny\Event\EventCenterAutoRegistrator::createEventCenterAutoEventData();
