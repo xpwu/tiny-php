@@ -21,10 +21,10 @@ abstract class Logger {
 
 
   static public function setConcreteLogger(Logger $logger) {
-    Logger::$instance = $logger;
+    self::$instance = $logger;
   }
   static public function hasSetConcreteLogger():bool {
-    return Logger::$instance !== null;
+    return self::$instance !== null;
   }
   /**
    * @var Logger
@@ -33,7 +33,7 @@ abstract class Logger {
 
   static private $isInited = false;
 
-  static public function getInstance() {
+  static public function getInstance():Logger {
     if (!self::$isInited) {
       self::$instance->init();
       self::$isInited = true;

@@ -21,10 +21,10 @@ abstract class Logger {
 
 
   static public function setConcreteLogger(Logger $logger) {
-    Logger::$instance = $logger;
+    self::$instance = $logger;
   }
   static public function hasSetConcreteLogger():bool {
-    return Logger::$instance !== null;
+    return self::$instance !== null;
   }
   /**
    * @var Logger
