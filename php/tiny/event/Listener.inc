@@ -26,7 +26,7 @@ abstract class Listener {
 
   abstract protected function handler();
 
-  public function process() {
+  public function process():bool {
     try {
       $this->handler();
     } catch (\Exception $e) {
@@ -34,12 +34,13 @@ abstract class Listener {
         ."+".Listener::getClassSign()." error!", $e);
 
       $this->event_->handlerError();
-      return;
+      return false;
     }
     Logger::getInstance()->debug($this->event_->getId()
       ."+".Listener::getClassSign()." success!");
 
     $this->event_->handlerOver();
+    return true;
   }
 
   public function getEvent():Event {

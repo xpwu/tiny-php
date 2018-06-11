@@ -25,7 +25,8 @@ class EventCenter {
     $listener->getEvent()->removeHandler($listener->getClassSign());
   }
 
-  public function postEvent(Event $event) {
+  public function postEvent(Event $event):bool {
+    $result = true;
     /**
      * @var $handlers array[['event'=>Event, 'handlers'=>[]], ...]
      */
@@ -37,9 +38,11 @@ class EventCenter {
           .$event_handler['event']->getId()
           .")--->Listener(".$handler.")");
         $listener = Listener::New($handler, $event_handler['event']);
-        $listener->process();
+        $result = $result && $listener->process();
       }
     }
+
+    return $result;
   }
 
   public function postTimerEvent() {
