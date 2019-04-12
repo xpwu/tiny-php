@@ -20,3 +20,8 @@ php/tiny/event/EventCenterAutoEventData.inc
 php/tiny/build/AutoLoader.inc
 
 cli/cli.phar
+1.0/TinyAPI/phpinte
+1.0/TinyDB/build/inte/annotation/tmp/sequence
+1.0/TinyDB/build/inte/dist/__index_cache__
+1.0/TinyDB/phpinte
+1.0/TinyDB/lib
