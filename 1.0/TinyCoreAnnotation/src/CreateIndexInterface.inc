@@ -6,7 +6,7 @@
  * Time: 下午2:56
  */
 
-namespace Tiny\DB;
+namespace Tiny\Annotation;
 
 
 interface CreateIndexInterface {
