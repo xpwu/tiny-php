@@ -12,15 +12,9 @@ $src = ['src/**/*.inc'];
 
 $exclude_src = [];
 
-$anno_and_dep_repo = "lib";
-
-$annotation_processors = ['TinyEventUtils:1.0'];
-
-$dependencies = ['TinyEventAnnotation:1.0'];
-
 $publish = [
   'repo'=> "lib",
-  'name'=> "TinyEvent",
+  'name'=> "TinyEventUtils",
   'version'=>"1.0"
 ];
 

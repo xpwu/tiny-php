@@ -21,7 +21,6 @@ abstract class EventIdFactory {
 class AllEventIdFactory extends EventIdFactory {
 
   protected function argId(string $argId): string {
-    // TODO: Implement argId() method.
     return "_all";
   }
 }
@@ -29,7 +28,6 @@ class AllEventIdFactory extends EventIdFactory {
 class ArgEventIdFactory extends EventIdFactory {
 
   protected function argId(string $argId): string {
-    // TODO: Implement argId() method.
     return "_arg_".$argId;
   }
 }

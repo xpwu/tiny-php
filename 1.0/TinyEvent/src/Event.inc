@@ -8,7 +8,6 @@
 
 namespace Tiny\Event;
 
-use Tiny\DB\EventData;
 
 class Event {
   /**
@@ -53,17 +52,17 @@ class Event {
 //  }
 
   /**
-   * @return array[['event'=>Event, 'handlers'=>[]], ...]
+   * @return string[]
    */
-  public function getHandlers():array {
+  public function getAllMayBeIds():array {
+    $ret = [];
+
     $this->setIdFactory(new AllEventIdFactory());
-    $handlers2 = EventCenterAutoRegistrator::getHandlers($this->getId());
-
+    $ret[] = $this->getId();
     $this->setIdFactory(new ArgEventIdFactory());
-    $handlers4 = EventCenterAutoRegistrator::getHandlers($this->getId());
+    $ret[] = $this->getId();
 
-    return [['event'=>$this, 'handlers'=>array_merge(
-      $handlers2, $handlers4)]];
+    return $ret;
   }
 
   public function toAll():self {
