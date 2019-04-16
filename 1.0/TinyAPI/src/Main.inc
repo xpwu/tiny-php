@@ -7,7 +7,12 @@
  * Time: 下午6:44
  */
 
-namespace Tiny;
+namespace Tiny\API;
+
+use Tiny\API;
+use Tiny\Logger;
+use Tiny\Request;
+use Tiny\Response;
 
 class Main {
 

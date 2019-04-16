@@ -12,9 +12,16 @@ $src = ['src/**/*.inc'];
 
 $exclude_src = [];
 
+$anno_and_dep_repo = "lib";
+
+$annotation_processors = [];
+
+$dependencies = ['TinyCore:1.0'];
+
+
 $publish = [
   'repo'=> "lib",
-  'name'=> "TinyDB",
+  'name'=> "TinyCLI",
   'version'=>"1.0"
 ];
 

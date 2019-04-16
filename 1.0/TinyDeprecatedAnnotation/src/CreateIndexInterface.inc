@@ -6,9 +6,12 @@
  * Time: 下午2:56
  */
 
-namespace Tiny\Annotation;
+namespace Tiny\DB;
 
-
+/**
+ * Interface CreateIndexInterface
+ * @deprecated
+ */
 interface CreateIndexInterface {
   static public function createIndex();
 }
