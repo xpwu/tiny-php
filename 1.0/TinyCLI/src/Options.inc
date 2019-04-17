@@ -5,18 +5,23 @@ namespace Tiny\CLI;
 
 
 use Inte\RunTimeEnv;
+use Tiny\CLI\Command\ListCommand;
+use Tiny\CLI\Command\NormalCommand;
 
 class Options {
 
+  /**
+   * Options constructor.
+   * @throws OK
+   */
   public function __construct() {
     $this->configFile = RunTimeEnv::getInstance()->getRunTime()->getPharDir()
       . DIRECTORY_SEPARATOR . "config.php";
+
+    $this->parse();
   }
 
-  /**
-   * @throws OK
-   */
-  public function parse():void {
+  private function parse():void {
     $argv = $_SERVER['argv'];
     $this->cliName_ = $argv[0];
 
@@ -27,6 +32,8 @@ class Options {
 
     $length = count($argv);
 
+    $force = false;
+
     $i = 1;
     for (; $i < $length; ++$i) {
 
@@ -35,15 +42,25 @@ class Options {
         throw new OK();
       }
       if ($argv[$i] == '-l') {
-        self::list();
-        return false;
+        $this->command_ = new ListCommand();
+        break;
       }
       if ($argv[$i] == '-f') {
-        $this->force = true;
+        $force = true;
         continue;
       }
       if ($argv[$i] == '-c' && $i+1 < $length) {
-        $this->configFile = $argv[++$i];
+        $configFile = $argv[++$i];
+        if (substr($configFile, 0, 1) != '/') {
+          $configFile = RunTimeEnv::getInstance()->getRunTime()->getPharDir()
+            . DIRECTORY_SEPARATOR . $configFile;
+        }
+        if (!file_exists($configFile)) {
+          throw new NormalError("can Not find config file ---".$configFile);
+        }
+
+        require_once ($configFile);
+
         continue;
       }
 
@@ -51,7 +68,12 @@ class Options {
       break;
     }
 
-    $this->commandArgv_ = array_slice($argv, $i);
+    $argv = array_slice($argv, $i);
+    if (count($argv) == 0) {
+      throw new NormalError("argv error! Please use -h");
+    }
+
+    $this->command_ = new NormalCommand($argv, $force);
   }
 
   private function echoUsage():void {
@@ -61,19 +83,25 @@ usage: php $this->cliName_ [-c <filename>, -f, -l, -h] <command> args
       -l: list all commands;
       -f <command>: force exec <command>;
       <command> -h: show command help;
-      -c <filename>: config filename, default is './config.php'.
+      -c <filename>: config filename, default is './config.php' 
+          and the dir is same to the dir of xxx.phar.
 
 EOF;
 
     echo $usage;
   }
 
-  /**
-   * @var string[]
-   */
-  private $commandArgv_;
+  public function getCommand():Command {
+    return $this->command_;
+  }
+
+
   private $cliName_;
 
-  public $force = false;
-  public $configFile = "./config.php";
+  public $configFile_ = "./config.php";
+
+  /**
+   * @var Command
+   */
+  private $command_;
 }

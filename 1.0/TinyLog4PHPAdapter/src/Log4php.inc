@@ -6,12 +6,20 @@
  * Time: 上午2:34
  */
 
-namespace Tiny\Logger;
+namespace Tiny;
 
 
-use Tiny\Logger;
 
-class Log4php extends Logger {
+class Log4PHPAdapter extends Logger {
+
+  const ALL = 0;
+  const TRACE = 1;
+  const DEBUG = 2;
+  const INFO = 3;
+  const WARN = 4;
+  const ERROR = 5;
+  const FATAL = 6;
+  const OFF = 7;
 
   const LEVEL_MAP = [
     "ALL",

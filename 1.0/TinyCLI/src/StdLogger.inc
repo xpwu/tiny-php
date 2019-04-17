@@ -6,8 +6,10 @@
  * Time: 下午9:38
  */
 
-namespace Tiny;
+namespace Tiny\CLI;
 
+
+use Tiny\Logger;
 
 class StdLogger extends Logger {
 

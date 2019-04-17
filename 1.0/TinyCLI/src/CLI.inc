@@ -9,9 +9,28 @@
 namespace Tiny;
 
 
+use Tiny\CLI\Annotation\AllCLIData;
+
 abstract class CLI implements CLIAnnotation {
+  /**
+   * @return string
+   * @deprecated
+   */
   static public function name():string {
     return get_class();
+  }
+
+  /**
+   * @return CLI[] array
+   * @throws \Exception
+   */
+  static public function getAllCLI():array {
+    $ret = [];
+    foreach (AllCLIData::getAllData() as $str) {
+      $ret[] = new $str;
+    }
+
+    return $ret;
   }
 
   /**

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tiny\Core\Utils;
+namespace Tiny\Core;
 
 
 class Time {

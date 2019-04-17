@@ -9,19 +9,9 @@
 namespace Tiny;
 
 
-use Tiny\Core\Utils\Time;
-use Tiny\Logger\Config;
+use Tiny\Core\Time;
 
 abstract class Logger {
-  const ALL = 0;
-  const TRACE = 1;
-  const DEBUG = 2;
-  const INFO = 3;
-  const WARN = 4;
-  const ERROR = 5;
-  const FATAL = 6;
-  const OFF = 7;
-
 
   static public function setConcreteLogger(Logger $logger) {
     self::$instance = $logger;
@@ -38,8 +28,7 @@ abstract class Logger {
 
   static public function getInstance():Logger {
     if (self::$instance === null) {
-      $logStr = Config::logger;
-      self::$instance = new $logStr();
+      throw new \Error("Not set Logger!!!");
     }
 
     if (!self::$isInited) {
