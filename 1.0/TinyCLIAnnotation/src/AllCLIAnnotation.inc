@@ -4,26 +4,10 @@
 namespace Tiny\CLI\Annotation;
 
 
+use Tiny\AnnotationHelper;
 use Tiny\CLIAnnotation;
 
-abstract class AllCLIAnnotation {
-  static public function getNameSpace():string {
-    return  __NAMESPACE__;
-  }
-
-  static public function getImplClassName():string {
-    return "AllCLIAnnotationImpl";
-  }
-
-  static public function getFileDirAndName():string {
-    $name = explode('\\', self::getNameSpace());
-    $name[] = self::getImplClassName() . '.inc';
-    return implode('/', $name);
-  }
-
-  static private function getFullClassName() {
-    return self::getNameSpace() . "\\" . self::getImplClassName();
-  }
+abstract class AllCLIAnnotation extends AnnotationHelper {
 
   /**
    * @return AllCLIAnnotation

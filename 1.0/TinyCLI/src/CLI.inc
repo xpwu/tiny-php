@@ -22,7 +22,7 @@ abstract class CLI implements CLIAnnotation {
   }
 
   /**
-   * @param array $argv. argv[0] -> first argv
+   * @param array $argv. argv[0] -> first argv, not cli name
    */
   abstract protected function run(array $argv):void;
 

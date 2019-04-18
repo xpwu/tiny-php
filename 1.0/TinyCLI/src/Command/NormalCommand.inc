@@ -11,9 +11,11 @@ use Tiny\CLI\Command;
 class NormalCommand implements Command {
 
   public function __construct(array $argv, bool $force = false) {
-    $cmdName = explode('/', $argv[0]);
-    $cmdName = implode('\\', $cmdName);
-    $clsname = "CLI\\".$cmdName;
+//    $cmdName = explode('/', $argv[0]);
+//    $cmdName = implode('\\', $cmdName);
+//    $clsname = "CLI\\".$cmdName;
+    $cmdName = $argv[0];
+    $clsname = $cmdName;
 
     if (!class_exists($clsname)) {
       throw new CLI\NormalError("not find command --- ".$cmdName);
