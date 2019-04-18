@@ -5,40 +5,52 @@ namespace Tiny;
 
 
 class AnnotationHelper {
-  static public function getNameSpace(?string $needHelpClass = null):string {
-    if ($needHelpClass === null) {
-      $needHelpClass = static::class;
+
+  static public function getNameSpace(
+    ?string $shouldCreateFileClass = null):string {
+
+    if ($shouldCreateFileClass === null) {
+      $shouldCreateFileClass = static::class;
     }
 
-    $pos = strrpos($needHelpClass, "\\");
-    if ($pos === false) {
-      return "";
+    try {
+      $clazz = new \ReflectionClass($shouldCreateFileClass);
+    } catch (\ReflectionException $e) {
+      Logger::getInstance()->fatal("", $e);
     }
-
-    return  substr($needHelpClass, 0, $pos);
+    return $clazz->getNamespaceName();
   }
 
-  static public function getImplClassName(?string $needHelpClass = null):string {
-    if ($needHelpClass === null) {
-      $needHelpClass = static::class;
+  static public function getCreatedClassName(?string $shouldCreateFileClass = null
+    , string  $suffix = "Impl"):string {
+    if ($shouldCreateFileClass === null) {
+      $shouldCreateFileClass = static::class;
     }
 
-    $pos = strrpos($needHelpClass, "\\");
-    if ($pos === false) {
-      $pos = 0;
+    try {
+      $clazz = new \ReflectionClass($shouldCreateFileClass);
+    } catch (\ReflectionException $e) {
+      Logger::getInstance()->fatal("", $e);
     }
-
-    return  substr($needHelpClass, $pos);
+    return $clazz->getShortName() . $suffix;
   }
 
-  static public function getFileDirAndName(?string $needHelpClass = null):string {
-    $name = explode('\\', self::getNameSpace($needHelpClass));
-    $name[] = self::getImplClassName($needHelpClass) . '.inc';
+  static public function getFileDirAndName(
+    ?string $shouldCreateFileClass = null
+    , string $fileSuffix = ".inc"):string {
+
+    $name = explode('\\', self::getNameSpace($shouldCreateFileClass));
+    $name[] = self::getCreatedClassName($shouldCreateFileClass) . $fileSuffix;
     return implode('/', $name);
   }
 
-  static public function getFullClassName(?string $needHelpClass = null) {
-    return self::getNameSpace($needHelpClass)
-      . "\\" . self::getImplClassName($needHelpClass);
+  static public function getFullClassName(?string $needHelpClass = null
+    , string $suffix = "Impl") {
+
+    if ($needHelpClass === null) {
+      $needHelpClass = static::class;
+    }
+
+    return $needHelpClass . $suffix;
   }
 }
