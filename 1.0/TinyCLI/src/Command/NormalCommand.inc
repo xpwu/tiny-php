@@ -7,8 +7,6 @@ namespace Tiny\CLI\Command;
 use Inte\RunTimeEnv;
 use Tiny\CLI;
 use Tiny\CLI\Command;
-use Tiny\Logger;
-use Tiny\StdLogger;
 
 class NormalCommand implements Command {
 

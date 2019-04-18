@@ -6,10 +6,11 @@
  * Time: 上午11:52
  */
 
+declare(strict_types=1);
+
 namespace Tiny;
 
 
-use Tiny\CLI\Annotation\AllCLIData;
 
 abstract class CLI implements CLIAnnotation {
   /**
@@ -18,19 +19,6 @@ abstract class CLI implements CLIAnnotation {
    */
   static public function name():string {
     return get_class();
-  }
-
-  /**
-   * @return CLI[] array
-   * @throws \Exception
-   */
-  static public function getAllCLI():array {
-    $ret = [];
-    foreach (AllCLIData::getAllData() as $str) {
-      $ret[] = new $str;
-    }
-
-    return $ret;
   }
 
   /**

@@ -4,7 +4,9 @@
 namespace Tiny\CLI\Annotation;
 
 
-class AllCLIData {
+use Tiny\CLIAnnotation;
+
+abstract class AllCLIAnnotation {
   static public function getNameSpace():string {
     return  __NAMESPACE__;
   }
@@ -23,16 +25,14 @@ class AllCLIData {
     return self::getNameSpace() . "\\" . self::getImplClassName();
   }
 
-  /**
-   * @return string[] array
-   * @throws \Exception
-   */
-  static public function getAllData():array {
-    if (!class_exists(self::getFullClassName())) {
-      throw new \Exception("please add processor: TinyCLIAnnotationProcessor");
-    }
-
-
-    return self::getFullClassName()::all;
+  static public function getImpl():AllCLIAnnotation {
+    $impl = self::getFullClassName();
+    return new $impl();
   }
+
+  /**
+   * @return CLIAnnotation[]
+   */
+  abstract public function getAllCLIAnnotation():array ;
+
 }
