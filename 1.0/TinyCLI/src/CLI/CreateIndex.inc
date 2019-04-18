@@ -50,11 +50,17 @@ class CreateIndex extends CLI {
 
       foreach ($all as $needCreateIndex) {
         Logger::getInstance()->info(
-          "index: " . get_class($needCreateIndex) . " ---> "
+          "create index: " . get_class($needCreateIndex) . " ---> "
           . $needCreateIndex::getDBName() . "."
           . $needCreateIndex::getCollectionName()."...");
 
-        $needCreateIndex::createIndex();
+        try {
+          $needCreateIndex::createIndex();
+        } catch (\Exception $exception) {
+          Logger::getInstance()->fatal("create index error: "
+            . get_class($needCreateIndex), $exception);
+        }
+
       }
 
       Logger::getInstance()->info("CreateIndex over!");
@@ -72,7 +78,14 @@ class CreateIndex extends CLI {
       return;
     }
 
-    $task::createIndex();
+    try {
+      $task::createIndex();
+    } catch (\Exception $exception) {
+      Logger::getInstance()->fatal("create index error: "
+        . get_class($task), $exception);
+    }
+
+    Logger::getInstance()->info("CreateIndex over!");
   }
 
   /**
@@ -83,6 +96,7 @@ class CreateIndex extends CLI {
     $help = <<<EOF
 <taskName>
   -l: 所有需要创建索引的任务列表，展示为： taskName ---> DB.Collection
+  -a: 执行所有需要创建索引的任务
 EOF;
 
     return $help;

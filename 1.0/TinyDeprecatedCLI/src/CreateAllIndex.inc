@@ -9,30 +9,33 @@
 namespace CLI;
 
 
+use Tiny\CLI;
+use Tiny\Deprecated\Annotation\CreateAllIndexHelper;
 use Tiny\Logger;
-use Tiny\Phpinte;
 
 /**
  * Class CreateAllIndex
  * @deprecated
  */
-class CreateAllIndex extends \Tiny\CLI {
+class CreateAllIndex extends CLI {
 
   /**
    * @param array $argv . argv[0] -> first argv
+   * @throws \Exception
    */
   protected function run(array $argv): void {
+
+    $helper = CreateAllIndexHelper::getImpl();
+
     /**
      * @var $class \Tiny\DB\CreateIndexInterface
      */
-    foreach (Phpinte::getAllClass() as $class) {
+    foreach ($helper->getAll() as $class) {
       try {
-        if (is_subclass_of($class, "Tiny\DB\CreateIndexInterface")) {
-          \Tiny\Logger::getInstance()->info("create index: ".$class);
-          $class::createIndex();
-        }
+        Logger::getInstance()->info("create index: ".$class);
+        $class::createIndex();
       } catch (\Exception $exception){
-        Logger::getInstance()->fatal("create index error: ".$class, $exception);
+        Logger::getInstance()->error("create index error: ".$class, $exception);
       }
     }
   }
@@ -50,6 +53,6 @@ class CreateAllIndex extends \Tiny\CLI {
    * @return string
    */
   function listInfo(): string {
-    return "创建所有数据库的索引";
+    return "创建所有数据库的索引，此命令即将废弃，请尽快替换为新的代码";
   }
 }
