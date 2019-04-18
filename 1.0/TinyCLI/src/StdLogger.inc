@@ -58,24 +58,18 @@ class StdLogger extends Logger {
   }
 
   public function warn(string $message, \Throwable $throwable = null) {
-    $throwa = ($throwable == null)?"":("\n".$throwable);
-    file_put_contents('php://output'
-      , self::YELLOW.$this->getDate()."[ WARN] ".$this->fullInfo."---".$message
-      ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
+    $this->formatColor(self::YELLOW, " WARN", $message, $throwable);
   }
 
   public function error(string $message, \Throwable $throwable = null) {
-    $throwa = ($throwable == null)?"":("\n".$throwable);
-    file_put_contents('php://output'
-      , self::RED.$this->getDate()."[ERROR] ".$this->fullInfo."---".$message
-      ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
+    $this->formatColor(self::RED, "ERROR", $message, $throwable);
   }
 
   public function fatal(string $message, \Throwable $throwable = null) {
-    $throwa = ($throwable == null)?"":("\n".$throwable);
-    file_put_contents('php://output'
-      , self::RED.$this->getDate()."[FATAL] ".$this->fullInfo."---".$message
-      ." ".$throwa. PHP_EOL . self::NONE . PHP_EOL);
+    $this->formatColor(self::RED, "FATAL", $message, $throwable);
+
+    // fatal, stop
+    throw new NormalError("");
   }
 
   private function format(string $type, string $message, \Throwable $throwable=null) {
@@ -84,6 +78,17 @@ class StdLogger extends Logger {
     $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
       , $this->getDate()."[$type]".$this->fullInfo."---".$message
-      ." ".$throwa. PHP_EOL);
+      . " " . $throwa. PHP_EOL);
+  }
+
+  private function formatColor(string $color, string $type
+    , string $message, \Throwable $throwable=null) {
+    // todo: why not use?
+//    $this->getLocationInformation();
+
+    $throwa = ($throwable == null)?"":("\n".$throwable);
+    file_put_contents('php://output'
+      , $color.$this->getDate()."[$type] ".$this->fullInfo."---".$message
+      . PHP_EOL . $throwa. PHP_EOL . self::NONE . PHP_EOL);
   }
 }

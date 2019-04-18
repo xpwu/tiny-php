@@ -11,6 +11,10 @@ class NormalError extends \Error {
   }
 
   public function __toString() {
+    if ($this->getMessage() === "") {
+      return "";
+    }
+
     return "Error: " . $this->getMessage() . PHP_EOL;
   }
 }
