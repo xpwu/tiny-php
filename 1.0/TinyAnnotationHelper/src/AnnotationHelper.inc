@@ -21,6 +21,21 @@ class AnnotationHelper {
     return $clazz->getNamespaceName();
   }
 
+  static public function getSuperShortClassName(
+    ?string $shouldCreateFileClass = null):string {
+
+    if ($shouldCreateFileClass === null) {
+      $shouldCreateFileClass = static::class;
+    }
+
+    try {
+      $clazz = new \ReflectionClass($shouldCreateFileClass);
+    } catch (\ReflectionException $e) {
+      Logger::getInstance()->fatal("", $e);
+    }
+    return $clazz->getShortName();
+  }
+
   static public function getCreatedClassName(?string $shouldCreateFileClass = null
     , string  $suffix = "Impl"):string {
     if ($shouldCreateFileClass === null) {
