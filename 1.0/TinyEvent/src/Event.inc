@@ -21,7 +21,7 @@ class Event {
     $this->argId_ = $argId;
   }
 
-  public function getId(): string {
+  public function getId(): EventID {
     return $this->idFactory_->getId(get_class($this), $this->argId_);
   }
 
@@ -52,7 +52,7 @@ class Event {
 //  }
 
   /**
-   * @return string[]
+   * @return EventID[]
    */
   public function getAllMayBeIds():array {
     $ret = [];

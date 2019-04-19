@@ -6,7 +6,7 @@ namespace Tiny\Deprecated\Annotation;
 
 use Tiny\DB\CreateIndexInterface;
 
-class MockAnnotation implements CreateIndexInterface {
+class CreateIndexMockAnnotation implements CreateIndexInterface {
 
   static public function createIndex() {
   }

@@ -16,11 +16,11 @@ abstract class Listener {
     $this->event_ = $event;
   }
 
-  public function getClassSign() {
-    return get_class($this);
+  public function getClassSign():ListenerClassSign {
+    return new ListenerClassSign(get_class($this));
   }
 
-  static public function New(string $classSign, Event $event):Listener {
+  static public function New(ListenerClassSign $classSign, Event $event):Listener {
     return new $classSign($event);
   }
 

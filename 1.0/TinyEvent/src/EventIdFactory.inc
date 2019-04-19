@@ -5,8 +5,8 @@ namespace Tiny\Event;
 
 
 abstract class EventIdFactory {
-  public function getId(string $className, string $argId): string {
-    return $className . $this->argId($argId);
+  public function getId(string $className, string $argId): EventID {
+    return new EventID($className . $this->argId($argId));
   }
 
   abstract protected function argId(string $argId): string ;

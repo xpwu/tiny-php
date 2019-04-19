@@ -10,6 +10,7 @@ namespace Tiny\Event;
 
 
 use Tiny\Event\Center\AutoEventData;
+use Tiny\Event\Center\AutoRegistratorHelper;
 use Tiny\Event\Center\DefaultName;
 use Tiny\Event\Center\Name;
 use Tiny\Logger;
@@ -21,7 +22,7 @@ class EventCenter {
   }
 
   static public function default() {
-    return new EventCenter(DefaultName::to());
+    return new EventCenter(DefaultName::toName());
   }
 
   static public function byName(Name $name) {
@@ -58,19 +59,27 @@ class EventCenter {
 
   public function postEvent(Event $event):bool {
     $ids = $event->getAllMayBeIds();
-    $handlers = [];
+    /**
+     * @var Listener[]
+     */
+    $listeners = [];
     $ret = true;
 
+    $helper = AutoRegistratorHelper::getRegistratorHelper($this->name_);
+
     foreach ($ids as $id) {
-      $handlers = array_merge($handlers
-        , AutoEventData::getHandlerForName($id, $this->name_));
+      $listeners = array_merge($listeners
+        , $helper->getAllListenerByEventID($id));
     }
 
-    foreach ($handlers as $handler) {
+    /**
+     * @var $listener Listener
+     */
+    foreach ($listeners as $listener) {
       Logger::getInstance()->debug("postEvent: Event("
           .$event->getId()
-          .")--->Listener(".$handler.")");
-      $listener = Listener::New($handler, $event);
+          .")--->Listener(" . $listener->getClassSign() .")");
+
       $ret = $ret && $listener->process();
     }
 

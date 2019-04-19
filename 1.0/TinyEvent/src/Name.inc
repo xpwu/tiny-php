@@ -10,7 +10,7 @@ class Name {
     $this->name_ = $name;
   }
 
-  static public function to():Name {
+  static public function toName():Name {
     return new Name(static::class);
   }
 

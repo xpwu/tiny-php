@@ -8,10 +8,12 @@
 
 namespace Tiny\DB;
 
+use Inte\Annotation;
+
 /**
  * Interface CreateIndexInterface
  * @deprecated
  */
-interface CreateIndexInterface {
+interface CreateIndexInterface extends Annotation {
   static public function createIndex();
 }
