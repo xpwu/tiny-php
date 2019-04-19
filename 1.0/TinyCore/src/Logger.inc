@@ -9,9 +9,20 @@
 namespace Tiny;
 
 
+use Tiny\Core\LoggerConfig;
+use Tiny\Core\LoggerLevel;
 use Tiny\Core\Time;
 
 abstract class Logger {
+
+  public const ALL = 0;
+  public const TRACE = 1;
+  public const DEBUG = 2;
+  public const INFO = 3;
+  public const WARN = 4;
+  public const ERROR = 5;
+  public const FATAL = 6;
+  public const OFF = 7;
 
   static public function setConcreteLogger(Logger $logger) {
     self::$instance = $logger;
@@ -42,18 +53,23 @@ abstract class Logger {
     return $this;
   }
 
+  public function __construct() {
+    $level = "Tiny\\Core\\LoggerLevel\\" . LoggerConfig::level;
+    $this->level = new $level();
+  }
+
   public function setRequest(Request $request) {
     $this->request = $request;
   }
 
   abstract protected function init();
 
-  abstract public function trace(string $message, \Throwable $throwable = null);
-  abstract public function debug(string $message, \Throwable $throwable = null);
-  abstract public function info(string $message, \Throwable $throwable = null);
-  abstract public function warn(string $message, \Throwable $throwable = null);
-  abstract public function error(string $message, \Throwable $throwable = null);
-  abstract public function fatal(string $message, \Throwable $throwable = null);
+  abstract public function trace(string $message, ?\Throwable $throwable = null);
+  abstract public function debug(string $message, ?\Throwable $throwable = null);
+  abstract public function info(string $message, ?\Throwable $throwable = null);
+  abstract public function warn(string $message, ?\Throwable $throwable = null);
+  abstract public function error(string $message, ?\Throwable $throwable = null);
+  abstract public function fatal(string $message, ?\Throwable $throwable = null);
 
   protected function getLocationInformation() {
 
@@ -94,6 +110,11 @@ abstract class Logger {
   protected function getDate():string {
     return Time::getCurrentMillSecondToString();
   }
+
+  /**
+   * @var LoggerLevel
+   */
+  protected $level;
 
   /**
    * @var Request

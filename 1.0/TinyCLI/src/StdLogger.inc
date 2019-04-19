@@ -41,54 +41,87 @@ class StdLogger extends Logger {
   private const CLEAR = "\e[2J";
   private const CLRLINE = "\r\e[K\" //or \"\e[1K\r";
 
+  private const levelMap = [
+      "  ALL"
+    , "TRACE"
+    , "DEBUG"
+    , " INFO"
+    , " WARN"
+    , "ERROR"
+    , "FATAL"
+    , "  OFF"
+  ];
+
   public function init() {
 
   }
 
-  public function trace(string $message, \Throwable $throwable = null) {
-    $this->format("TRACE", $message, $throwable);
+  public function trace(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::TRACE, $message, $throwable);
   }
 
-  public function debug(string $message, \Throwable $throwable = null) {
-    $this->format("DEBUG", $message, $throwable);
+  public function debug(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::DEBUG, $message, $throwable);
   }
 
-  public function info(string $message, \Throwable $throwable = null) {
-    $this->format(" INFO", $message, $throwable);
+  public function info(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::INFO, $message, $throwable);
   }
 
-  public function warn(string $message, \Throwable $throwable = null) {
-    $this->formatColor(self::YELLOW, " WARN", $message, $throwable);
+  public function warn(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::WARN
+      , $message, $throwable, self::YELLOW);
   }
 
-  public function error(string $message, \Throwable $throwable = null) {
-    $this->formatColor(self::RED, "ERROR", $message, $throwable);
+  public function error(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::ERROR
+      , $message, $throwable, self::RED);
   }
 
-  public function fatal(string $message, \Throwable $throwable = null) {
-    $this->formatColor(self::RED, "FATAL", $message, $throwable);
+  public function fatal(string $message, ?\Throwable $throwable = null) {
+    $this->format(Logger::FATAL
+      , $message, $throwable, self::RED);
 
     // fatal, stop
     throw new NormalError("");
   }
 
-  private function format(string $type, string $message, \Throwable $throwable=null) {
+//  private function format(int $needLevel, string $type
+//    , string $message, \Throwable $throwable=null) {
+//    if ($needLevel < $this->level->value()) {
+//      return;
+//    }
+//
+//    $this->getLocationInformation();
+//
+//    $throwa = ($throwable == null)?"":("\n".$throwable);
+//    file_put_contents('php://output'
+//      , $this->getDate()."[$type]".$this->fullInfo."---".$message
+//      . " " . $throwa. PHP_EOL);
+//  }
+
+  private function format(int $needLevel, string $message
+    , ?\Throwable $throwable=null, ?string $color = null) {
+
+    if ($needLevel < $this->level->value()) {
+      return;
+    }
+
     $this->getLocationInformation();
 
     $throwa = ($throwable == null)?"":("\n".$throwable);
-    file_put_contents('php://output'
-      , $this->getDate()."[$type]".$this->fullInfo."---".$message
-      . " " . $throwa. PHP_EOL);
-  }
 
-  private function formatColor(string $color, string $type
-    , string $message, \Throwable $throwable=null) {
-    // todo: why not use?
-//    $this->getLocationInformation();
+    $beginColor = $color;
+    $endColor = self::NONE . PHP_EOL;
+    if ($color === null) {
+      $beginColor = "";
+      $endColor = "";
+    }
 
-    $throwa = ($throwable == null)?"":("\n".$throwable);
     file_put_contents('php://output'
-      , $color.$this->getDate()."[$type] ".$this->fullInfo."---".$message
-      . PHP_EOL . $throwa. PHP_EOL . self::NONE . PHP_EOL);
+      , $beginColor . $this->getDate()
+      . "[" . self::levelMap[$needLevel] ."] "
+      . $this->fullInfo."---" . $message
+      . PHP_EOL . $throwa. PHP_EOL . $endColor);
   }
 }

@@ -12,15 +12,6 @@ namespace Tiny;
 
 class Log4PHPAdapter extends Logger {
 
-  const ALL = 0;
-  const TRACE = 1;
-  const DEBUG = 2;
-  const INFO = 3;
-  const WARN = 4;
-  const ERROR = 5;
-  const FATAL = 6;
-  const OFF = 7;
-
   const LEVEL_MAP = [
     "ALL",
     "TRACE",
@@ -55,30 +46,31 @@ class Log4PHPAdapter extends Logger {
     ));
 
     $this->logger_ = \Logger::getRootLogger();
-    $this->logger_->setLevel(\LoggerLevel::toLevel(self::LEVEL_MAP[\Config\Logger::level]));
+    $this->logger_->setLevel(\LoggerLevel::toLevel(
+      self::LEVEL_MAP[$this->level->value()]));
   }
 
-  public function trace(string $message, \Throwable $throwable = null) {
+  public function trace(string $message, ?\Throwable $throwable = null) {
     $this->logger_->trace($this->format($message), $throwable);
   }
 
-  public function debug(string $message, \Throwable $throwable = null) {
+  public function debug(string $message, ?\Throwable $throwable = null) {
     $this->logger_->debug($this->format($message), $throwable);
   }
 
-  public function info(string $message, \Throwable $throwable = null) {
+  public function info(string $message, ?\Throwable $throwable = null) {
     $this->logger_->info($this->format($message), $throwable);
   }
 
-  public function warn(string $message, \Throwable $throwable = null) {
+  public function warn(string $message, ?\Throwable $throwable = null) {
     $this->logger_->warn($this->format($message), $throwable);
   }
 
-  public function error(string $message, \Throwable $throwable = null) {
+  public function error(string $message, ?\Throwable $throwable = null) {
     $this->logger_->error($this->format($message), $throwable);
   }
 
-  public function fatal(string $message, \Throwable $throwable = null) {
+  public function fatal(string $message, ?\Throwable $throwable = null) {
     $this->logger_->fatal($this->format($message), $throwable);
   }
 

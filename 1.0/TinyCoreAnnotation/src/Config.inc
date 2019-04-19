@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Tiny\Annotation;
+namespace Tiny\Core\Annotation;
 
 
-interface Config {
-  function getHelp():string ;
+use Inte\Annotation;
+
+interface Config extends Annotation {
 }
