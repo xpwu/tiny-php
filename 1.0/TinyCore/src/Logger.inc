@@ -54,7 +54,8 @@ abstract class Logger {
   }
 
   public function __construct() {
-    $level = "Tiny\\Core\\LoggerLevel\\" . LoggerConfig::level;
+//    $level = "Tiny\\Core\\LoggerLevel\\" . LoggerConfig::level;
+    $level = LoggerConfig::level;
     $this->level = new $level();
   }
 
