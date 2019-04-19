@@ -33,12 +33,8 @@ abstract class AllOldCreateIndexInterfaceHelper extends AnnotationHelper
     }
   }
 
-  static function getDBName():string {
-    return "<所有使用CreateIndexInterface注解的DB>";
-  }
-
-  static function getCollectionName():string {
-    return "<请尽快替换为新的方式>";
+  static function description():string {
+    return "<所有使用CreateIndexInterface注解的DB, 请尽快替换为新的方式>";
   }
 
   static function getHelper():?AllOldCreateIndexInterfaceHelper {

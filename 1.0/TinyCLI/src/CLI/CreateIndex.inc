@@ -28,14 +28,12 @@ class CreateIndex extends CLI {
        */
       $all = $helper->getAll();
       echo "sum = " . count($all) . PHP_EOL;
-      echo "taskName ---> DB.Collection" .PHP_EOL;
+      echo "taskName ---> description" .PHP_EOL;
       echo "---------------" . PHP_EOL;
 
       foreach ($all as $needCreateIndex) {
         echo  get_class($needCreateIndex) . " ---> "
-          . $needCreateIndex::getDBName() . "."
-          . $needCreateIndex::getCollectionName()
-          . PHP_EOL;
+          . $needCreateIndex::description() . PHP_EOL;
       }
 
       return;
@@ -51,8 +49,7 @@ class CreateIndex extends CLI {
       foreach ($all as $needCreateIndex) {
         Logger::getInstance()->info(
           "create index: " . get_class($needCreateIndex) . " ---> "
-          . $needCreateIndex::getDBName() . "."
-          . $needCreateIndex::getCollectionName()."...");
+          . $needCreateIndex::description() . " ...");
 
         try {
           $needCreateIndex::createIndex();
@@ -95,7 +92,7 @@ class CreateIndex extends CLI {
   function getHelp(): string {
     $help = <<<EOF
 <taskName>
-  -l: 所有需要创建索引的任务列表，展示为： taskName ---> DB.Collection
+  -l: 所有需要创建索引的任务列表，展示为： taskName ---> description
   -a: 执行所有需要创建索引的任务
 EOF;
 
