@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyCoreAnnotation";
+$version = "1.0";
+
+$dependencies = ["InteCoreAnnotation:1.0"];
+
+
