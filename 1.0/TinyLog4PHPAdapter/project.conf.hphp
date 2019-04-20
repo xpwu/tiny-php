@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: xpwu
+ * Date: 2019/3/23
+ * Time: 6:39 PM
+ */
+
+
+
+$src = ['src/**/*.inc'];
+
+$exclude_src = [];
+
+$anno_and_dep_repo = "../lib";
+
+$dependencies = ['log4php/2.0/[Logger@Logger.php]', 'TinyCore:1.0'];
+
+//$dependencies = ['TinyCore:1.0'];
+
+
+$publish = [
+  'repo'=> "../lib",
+  'name'=> "TinyLog4PHPAdapter",
+  'version'=>"1.0"
+];
+

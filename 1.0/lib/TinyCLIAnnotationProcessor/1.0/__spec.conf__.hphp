@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyCLIAnnotationProcessor";
+$version = "1.0";
+
+$dependencies = ["TinyCLIAnnotation:1.0"];
+
+$annotationServer = ["Tiny\CLIAnnotationProcessor"];

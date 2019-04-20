@@ -1,0 +1,25 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: xpwu
+ * Date: 2019/3/23
+ * Time: 6:39 PM
+ */
+
+
+
+$src = ['src/**/*.inc'];
+
+$exclude_src = [];
+
+$anno_and_dep_repo = "../lib";
+
+$dependencies = ['TinyDeprecatedAnnotation:1.0'];
+
+$publish = [
+  'repo'=> "../lib",
+  'name'=> "TinyDeprecatedAnnotationProcessor",
+  'version'=>"1.0",
+  'annotation_services' => [\Tiny\Annotation\Processor\CreateIndexProcessor::class]
+];
+

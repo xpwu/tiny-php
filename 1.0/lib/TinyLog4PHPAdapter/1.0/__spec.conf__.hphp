@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyLog4PHPAdapter";
+$version = "1.0";
+
+$dependencies = ["log4php/2.0/[Logger@Logger.php]","TinyCore:1.0"];
+
+

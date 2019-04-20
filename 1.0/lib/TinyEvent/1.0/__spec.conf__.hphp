@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyEvent";
+$version = "1.0";
+
+$dependencies = ["TinyAnnotationHelper:1.0"];
+
+

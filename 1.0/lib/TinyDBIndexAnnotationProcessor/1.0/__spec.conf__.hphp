@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyDBIndexAnnotationProcessor";
+$version = "1.0";
+
+$dependencies = ["TinyDBIndexAnnotation:1.0","TinyAnnotationHelper:1.0"];
+
+

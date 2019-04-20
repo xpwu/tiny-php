@@ -12,9 +12,15 @@ $src = ['src/**/*.inc'];
 
 $exclude_src = [];
 
+$anno_and_dep_repo = "../lib";
+
+$dependencies = ['TinyEventCenterRegistratorAnnotation:1.0'];
+
 $publish = [
-  'repo'=> "lib",
-  'name'=> "TinyEventAnnotationProcessor",
-  'version'=>"1.0"
+  'repo'=> "../lib",
+  'name'=> "TinyEventCenterRegistratorAnnotationProcessor",
+  'version'=>"1.0",
+  'annotation_services'
+    => [\Tiny\Event\Annotation\Processor\EventCenterAutoRegistratorProcessor::class]
 ];
 

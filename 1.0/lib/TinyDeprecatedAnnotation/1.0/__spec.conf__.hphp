@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyDeprecatedAnnotation";
+$version = "1.0";
+
+$dependencies = ["TinyDBIndexAnnotation:1.0","TinyEventCenterRegistratorAnnotation:1.0"];
+
+

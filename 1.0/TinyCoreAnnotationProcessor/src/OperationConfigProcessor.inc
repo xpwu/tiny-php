@@ -77,6 +77,7 @@ namespace $nameSpace {
   
 $classDoc
 class $className {
+
 EOF;
 
       $constant = "";

@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyEventCenterRegistratorAnnotationProcessor";
+$version = "1.0";
+
+$dependencies = ["TinyEventCenterRegistratorAnnotation:1.0"];
+
+$annotationServer = ["Tiny\Event\Annotation\Processor\EventCenterAutoRegistratorProcessor"];
