@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: xpwu
+ * Date: 2019/3/23
+ * Time: 6:39 PM
+ */
+
+
+
+$src = ['src/**/*.inc'];
+
+
+$publish = [
+  'repo'=> "lib",
+  'name'=> "TinyAnnotationHelper",
+  'version'=>"1.0"
+];
+
