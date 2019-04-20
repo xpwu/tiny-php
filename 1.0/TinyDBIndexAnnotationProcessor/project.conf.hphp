@@ -19,6 +19,7 @@ $dependencies = ['TinyDBIndexAnnotation:1.0', 'TinyAnnotationHelper:1.0'];
 $publish = [
   'repo'=> "lib",
   'name'=> "TinyDBIndexAnnotationProcessor",
-  'version'=>"1.0"
+  'version'=>"1.0",
+  'annotation_services' => [\Tiny\DB\Annotation\Processor\NeedCreateIndexProcessor::class]
 ];
 
