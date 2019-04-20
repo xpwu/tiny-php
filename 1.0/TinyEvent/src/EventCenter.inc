@@ -9,7 +9,6 @@
 namespace Tiny\Event;
 
 
-use Tiny\Event\Center\AutoEventData;
 use Tiny\Event\Center\AutoRegistratorHelper;
 use Tiny\Event\Center\DefaultName;
 use Tiny\Event\Center\Name;
@@ -17,7 +16,7 @@ use Tiny\Logger;
 
 class EventCenter {
 
-  public function __construct(Name $name) {
+  private function __construct(Name $name) {
     $this->name_ = $name;
   }
 
@@ -60,30 +59,36 @@ class EventCenter {
   public function postEvent(Event $event):bool {
     $ids = $event->getAllMayBeIds();
     /**
-     * @var Listener[]
+     * @var ListenerClassSign[]
      */
-    $listeners = [];
+    $listenerClassSigns = [];
     $ret = true;
 
     $helper = AutoRegistratorHelper::getRegistratorHelper($this->name_);
 
     foreach ($ids as $id) {
-      $listeners = array_merge($listeners
-        , $helper->getAllListenerByEventID($id));
+      $listenerClassSigns = array_merge($listenerClassSigns
+        , $helper->getAllListenerClassSignByEventID($id));
     }
 
     /**
-     * @var $listener Listener
+     * @var $listenerClassSign Listener
      */
-    foreach ($listeners as $listener) {
+    foreach ($listenerClassSigns as $listenerClassSign) {
       Logger::getInstance()->debug("postEvent: Event("
           .$event->getId()
-          .")--->Listener(" . $listener->getClassSign() .")");
+          .")--->Listener(" . $listenerClassSign .")");
+
+      $listener = Listener::New($listenerClassSign, $event);
 
       $ret = $ret && $listener->process();
     }
 
     return $ret;
+  }
+
+  public function getName():Name {
+    return $this->name_;
   }
 
 //  public function postTimerEvent() {

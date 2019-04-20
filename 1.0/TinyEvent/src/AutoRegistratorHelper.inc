@@ -6,7 +6,7 @@ namespace Tiny\Event\Center;
 
 use Tiny\AnnotationHelper;
 use Tiny\Event\EventID;
-use Tiny\Event\Listener;
+use Tiny\Event\ListenerClassSign;
 
 class AutoRegistratorHelper extends AnnotationHelper {
   static public function getRegistratorHelper(Name $name):AutoRegistratorHelper {
@@ -19,9 +19,9 @@ class AutoRegistratorHelper extends AnnotationHelper {
   }
 
   /**
-   * @return Listener[]
+   * @return ListenerClassSign[]
    */
-  public function getAllListenerByEventID(EventID $eventId):array {
+  public function getAllListenerClassSignByEventID(EventID $eventId):array {
     return [];
   }
 }
