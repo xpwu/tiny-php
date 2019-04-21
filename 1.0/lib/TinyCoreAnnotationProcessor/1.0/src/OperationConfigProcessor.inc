@@ -70,13 +70,16 @@ class OperationConfigProcessor extends AbstractAnnotationServer {
       $className = $reflectionClass->getShortName();
       $classDoc = $reflectionClass->getDocComment();
 
+      $ns = <<<EOF
+
+namespace $nameSpace {
+
+EOF;
+
       $content = <<<EOF
       
-      
-namespace $nameSpace {
-  
 $classDoc
-class $className {
+interface $className {
 
 EOF;
 
@@ -97,11 +100,17 @@ EOF;
 
       $content = $content.$constant.<<<EOF
       
-  }
+}
+EOF;
+      $content = str_replace("\n", "\n\t", $content);
+
+      $nsEnd = <<<EOF
+      
 }
 EOF;
 
-      $this->content_ = $this->content_ . $content;
+
+      $this->content_ = $this->content_ . $ns . $content . $nsEnd;
     }
   }
 
