@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyDeprecatedLogic";
+$version = "1.0";
+
+$dependencies = ["TinyDB:1.0","TinyCoreAnnotation:1.0"];
+
+

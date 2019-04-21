@@ -1,0 +1,26 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: xpwu
+ * Date: 2019/3/23
+ * Time: 6:39 PM
+ */
+
+
+
+$src = ['src/**/*.inc'];
+
+$exclude_src = [];
+
+$anno_and_dep_repo = "../lib";
+
+$dependencies = ['TinyDB:1.0', 'TinyCoreAnnotation:1.0'];
+
+$annotation_processors = ['TinyCoreAnnotationProcessor:1.0'];
+
+$publish = [
+  'repo'=> "../lib",
+  'name'=> "TinyDeprecatedLogic",
+  'version'=>"1.0"
+];
+
