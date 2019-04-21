@@ -4,7 +4,7 @@
 namespace Tiny\CLI;
 
 
-use Inte\RunTimeEnv;
+use Inte\RunTime;
 use Tiny\CLI\Command\ListCommand;
 use Tiny\CLI\Command\NormalCommand;
 
@@ -15,9 +15,6 @@ class Options {
    * @throws OK
    */
   public function __construct() {
-    $this->configFile = RunTimeEnv::getInstance()->getRunTime()->getPharDir()
-      . DIRECTORY_SEPARATOR . "config.php";
-
     $this->parse();
   }
 
@@ -29,6 +26,9 @@ class Options {
       $this->echoUsage();
       throw new OK();
     }
+
+    $configFile = RunTime::default()->getPharDir()
+      . DIRECTORY_SEPARATOR . "operation_config.php";
 
     $length = count($argv);
 
@@ -43,7 +43,7 @@ class Options {
       }
       if ($argv[$i] == '-l') {
         $this->command_ = new ListCommand();
-        break;
+        return;
       }
       if ($argv[$i] == '-f') {
         $force = true;
@@ -52,14 +52,12 @@ class Options {
       if ($argv[$i] == '-c' && $i+1 < $length) {
         $configFile = $argv[++$i];
         if (substr($configFile, 0, 1) != '/') {
-          $configFile = RunTimeEnv::getInstance()->getRunTime()->getPharDir()
+          $configFile = RunTime::default()->getPharDir()
             . DIRECTORY_SEPARATOR . $configFile;
         }
         if (!file_exists($configFile)) {
           throw new NormalError("can Not find config file ---".$configFile);
         }
-
-        require_once ($configFile);
 
         continue;
       }
@@ -73,6 +71,10 @@ class Options {
       throw new NormalError("argv error! Please use -h");
     }
 
+    if (file_exists($configFile)) {
+      require_once ($configFile);
+    }
+
     $this->command_ = new NormalCommand($argv, $force);
   }
 
@@ -83,7 +85,7 @@ usage: php $this->cliName_ [-c <filename>, -f, -l, -h] <command> args
       -l: list all commands;
       -f <command>: force exec <command>;
       <command> -h: show command help;
-      -c <filename>: config filename, default is './config.php' 
+      -c <filename>: config filename, default is './operation_config.php' 
           and the dir is same to the dir of xxx.phar.
 
 EOF;
@@ -97,8 +99,6 @@ EOF;
 
 
   private $cliName_;
-
-  public $configFile_ = "./config.php";
 
   /**
    * @var Command

@@ -109,10 +109,10 @@ class StdLogger extends Logger {
 
     $this->getLocationInformation();
 
-    $throwa = ($throwable == null)?"":("\n".$throwable);
+    $throwa = ($throwable == null)?"":($throwable . PHP_EOL);
 
     $beginColor = $color;
-    $endColor = self::NONE . PHP_EOL;
+    $endColor = self::NONE;
     if ($color === null) {
       $beginColor = "";
       $endColor = "";
@@ -121,7 +121,7 @@ class StdLogger extends Logger {
     file_put_contents('php://output'
       , $beginColor . $this->getDate()
       . "[" . self::levelMap[$needLevel] ."] "
-      . $this->fullInfo."---" . $message
-      . PHP_EOL . $throwa. PHP_EOL . $endColor);
+      . $this->fullInfo."---" . $message . PHP_EOL
+      . $throwa. $endColor);
   }
 }

@@ -13,7 +13,7 @@ $src = ['src/**/*.inc'];
 $exclude_src = [];
 
 $publish = [
-  'repo'=> "lib",
+  'repo'=> "../lib",
   'name'=> "TinyDB",
   'version'=>"1.0"
 ];

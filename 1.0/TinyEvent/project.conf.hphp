@@ -10,12 +10,12 @@
 
 $src = ['src/**/*.inc'];
 
-$anno_and_dep_repo = "lib";
+$anno_and_dep_repo = "../lib";
 
 $dependencies = ['TinyAnnotationHelper:1.0'];
 
 $publish = [
-  'repo'=> "lib",
+  'repo'=> "../lib",
   'name'=> "TinyEvent",
   'version'=>"1.0"
 ];

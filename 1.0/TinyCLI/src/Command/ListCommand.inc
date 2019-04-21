@@ -14,7 +14,8 @@ class ListCommand implements Command {
     $annotations = $impl->getAllCLIAnnotation();
 
     foreach ($annotations as $annotation) {
-      echo get_class($annotation) . "\t". $annotation->listInfo() . PHP_EOL;
+      echo str_replace("\\", "\\\\", get_class($annotation))
+        . "\t". $annotation->listInfo() . PHP_EOL;
     }
   }
 }

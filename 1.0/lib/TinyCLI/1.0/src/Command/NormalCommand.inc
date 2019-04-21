@@ -4,7 +4,7 @@
 namespace Tiny\CLI\Command;
 
 
-use Inte\RunTimeEnv;
+use Inte\RunTime;
 use Tiny\CLI;
 use Tiny\CLI\Command;
 
@@ -27,7 +27,7 @@ class NormalCommand implements Command {
 
     if (count($this->argv_) >= 1 && $this->argv_[0] == '-h') {
       echo "usage: php "
-        . RunTimeEnv::getInstance()->getRunTime()->getPharBaseName()
+        . RunTime::default()->getPharBaseName()
         . " ".$cmdName." ".$this->cli_->getHelp().PHP_EOL;
 
       throw new CLI\OK();

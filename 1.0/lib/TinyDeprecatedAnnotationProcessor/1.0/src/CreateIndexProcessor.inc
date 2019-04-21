@@ -23,7 +23,7 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
     }
 
     foreach ($classes as $class) {
-      $clazz = new \ReflectionClass($classes);
+      $clazz = new \ReflectionClass($class);
       if ($clazz->isSubclassOf(CreateIndexInterface::class)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         $this->all_[] = $class;
@@ -35,7 +35,7 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
 
 
   /**
-   * @param array $dependencyClasses
+   * @param string[] $dependencyClasses
    * @throws \ReflectionException
    */
   public function processDependencyClasses(array $dependencyClasses): void {
@@ -44,7 +44,7 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
     }
 
     foreach ($dependencyClasses as $dependencyClass) {
-      $clazz = new \ReflectionClass($dependencyClasses);
+      $clazz = new \ReflectionClass($dependencyClass);
       if ($clazz->isSubclassOf(CreateIndexInterface::class)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         $this->all_[] = $dependencyClass;

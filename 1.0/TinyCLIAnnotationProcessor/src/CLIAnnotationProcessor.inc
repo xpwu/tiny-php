@@ -24,7 +24,7 @@ class CLIAnnotationProcessor extends AbstractAnnotationServer {
     }
 
     foreach ($classes as $class) {
-      $clazz = new \ReflectionClass($classes);
+      $clazz = new \ReflectionClass($class);
       if ($clazz->isSubclassOf(CLIAnnotation::class)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         $this->allCli_[] = $class;

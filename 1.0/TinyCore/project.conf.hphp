@@ -12,14 +12,14 @@ $src = ['src/**/*.inc'];
 
 $exclude_src = [];
 
-$anno_and_dep_repo = "lib";
+$anno_and_dep_repo = "../lib";
 
 $annotation_processors = ['TinyCoreAnnotationProcessor:1.0'];
 
 $dependencies = ['TinyCoreAnnotation:1.0'];
 
 $publish = [
-  'repo'=> "lib",
+  'repo'=> "../lib",
   'name'=> "TinyCore",
   'version'=>"1.0"
 ];

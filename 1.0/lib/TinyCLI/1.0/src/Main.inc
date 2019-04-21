@@ -25,8 +25,9 @@ class Main {
 //    set_error_handler("exception_error_handler");
 
     Logger::setConcreteLogger(new StdLogger());
-    $options = new Options();
+
     try {
+      $options = new Options();
       $options->getCommand()->run();
       exit(0);
     }catch (OK $error) {
