@@ -13,7 +13,9 @@ abstract class AllNeedCreateIndex extends AnnotationHelper {
   static public function getImpl():AllNeedCreateIndex {
     $impl = self::getFullClassName();
     if (!class_exists($impl)) {
-      throw new \Exception("please add processor: TinyDBIndexAnnotationProcessor");
+      throw new \Exception(
+        "please add processor: TinyDBIndexAnnotationProcessor with"
+        . " \$annotation_processors in project.conf.hphp");
     }
     return new $impl();
   }

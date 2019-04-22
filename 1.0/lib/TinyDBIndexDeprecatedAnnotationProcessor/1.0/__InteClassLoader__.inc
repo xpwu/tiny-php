@@ -1,6 +1,6 @@
 <?php
 
-namespace TinyDeprecatedAnnotationProcessor;
+namespace TinyDBIndexDeprecatedAnnotationProcessor;
 
 /*
  * ------Auto Created By Integrator, DO NOT modify this file------

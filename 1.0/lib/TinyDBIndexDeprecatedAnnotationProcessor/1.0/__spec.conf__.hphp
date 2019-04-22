@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyDBIndexDeprecatedAnnotationProcessor";
+$version = "1.0";
+
+$dependencies = ["TinyDBIndexDeprecatedAnnotation:1.0"];
+
+$annotationServer = ["Tiny\Annotation\Processor\CreateIndexProcessor"];

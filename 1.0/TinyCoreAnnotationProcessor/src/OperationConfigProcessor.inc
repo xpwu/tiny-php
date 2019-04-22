@@ -107,6 +107,8 @@ EOF;
       $nsEnd = <<<EOF
       
 }
+
+
 EOF;
 
 

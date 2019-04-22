@@ -14,11 +14,11 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "../lib";
 
-$dependencies = ['TinyDeprecatedAnnotation:1.0'];
+$dependencies = ['TinyDBIndexDeprecatedAnnotation:1.0'];
 
 $publish = [
   'repo'=> "../lib",
-  'name'=> "TinyDeprecatedAnnotationProcessor",
+  'name'=> "TinyDBIndexDeprecatedAnnotationProcessor",
   'version'=>"1.0",
   'annotation_services' => [\Tiny\Annotation\Processor\CreateIndexProcessor::class]
 ];

@@ -10,5 +10,6 @@ class ClassLoader {
   public const AllClasses = [
     
 		"Tiny\Event\Center\Annotation\AutoRegistrator" => "src/AutoRegistrator.inc",
+		"Tiny\Event\EventCenterAutoRegistrator" => "src/EventCenterAutoRegistrator.inc",
   ];
 }

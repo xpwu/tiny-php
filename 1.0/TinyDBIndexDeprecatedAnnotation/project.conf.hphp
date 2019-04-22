@@ -19,7 +19,7 @@ $dependencies = ['TinyDBIndexAnnotation:1.0'
 
 $publish = [
   'repo'=> "../lib",
-  'name'=> "TinyDeprecatedAnnotation",
+  'name'=> "TinyDBIndexDeprecatedAnnotation",
   'version'=>"1.0"
 ];
 

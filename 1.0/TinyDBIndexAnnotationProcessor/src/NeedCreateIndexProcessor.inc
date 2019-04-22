@@ -67,8 +67,6 @@ class NeedCreateIndexProcessor extends AbstractAnnotationServer {
 
 namespace $nameSpace;
 
-use Tiny\DB\Index\Annotation\NeedCreateIndex;
-
 class $className extends $superClass {
 
   private \$all = [$all];

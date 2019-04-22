@@ -50,7 +50,7 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
    */
   private function processClasses(array $classes):void {
     foreach ($classes as $class) {
-      $clazz = new \ReflectionClass($classes);
+      $clazz = new \ReflectionClass($class);
       if ($clazz->isSubclassOf(AutoRegistrator::class)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         /**
@@ -71,7 +71,7 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
     $eventId = $listener->getEvent()->getId()->__toString();
     $listenerClassSing = $listener->getClassSign()->__toString();
 
-    $eventMap = $this->nameEventMap_[$name];
+    $eventMap = @$this->nameEventMap_[$name];
     if (!isset($eventMap)) {
       $eventMap = [];
     }
@@ -79,7 +79,7 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
     /**
      * @var $classSigns string[]
      */
-    $classSigns = $eventMap[$eventId];
+    $classSigns = @$eventMap[$eventId];
     if (!isset($classSigns)) {
       $classSigns = [];
     }
@@ -99,9 +99,8 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
       $content = <<< EOF
 <?php
 
-$nameSpace;
+namespace $nameSpace;
 
-use Tiny\AnnotationHelper;
 use Tiny\Event\EventID;
 use Tiny\Event\ListenerClassSign;
 
@@ -110,11 +109,17 @@ class $className extends $superClass {
    * @return ListenerClassSign[]
    */
   public function getAllListenerClassSignByEventID(EventID \$eventId):array {
-    if (!array_key_exists(\$eventId, \$this->all_)) {
+    \$id = \$eventId->__toString();
+    
+    if (!array_key_exists(\$id, \$this->all_)) {
       return [];
     }
     
-    return \$this->all_[\$eventId];
+    \$ret = [];
+    foreach (\$this->all_[\$id] as \$item) {
+      \$ret[] = new ListenerClassSign(\$item);
+    }
+    return \$ret;
   }
   
   private \$all_ = [
