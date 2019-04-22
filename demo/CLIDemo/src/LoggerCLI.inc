@@ -17,6 +17,12 @@ class LoggerCLI extends CLI {
     Logger::getInstance()->info(Utils::stringArray2string($argv));
     Logger::getInstance()->warn(Utils::stringArray2string($argv));
     Logger::getInstance()->error(Utils::stringArray2string($argv));
+
+    Logger::getInstance()->fatal(Utils::stringArray2string($argv));
+
+    Logger::getInstance()->info(Utils::stringArray2string($argv));
+    Logger::getInstance()->warn(Utils::stringArray2string($argv));
+    Logger::getInstance()->error(Utils::stringArray2string($argv));
   }
 
   /**

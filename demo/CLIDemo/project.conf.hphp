@@ -14,12 +14,20 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "lib";
 
-$annotation_processors = ['TinyCLIAnnotationProcessor:1.0'
-  , 'TinyDBIndexAnnotationProcessor:1.0', 'TinyDeprecatedAnnotationProcessor:1.0'];
+$annotation_processors = ['TinyCLIAnnotationProcessor:1.0'];
 
-$dependencies = ['TinyCLI:1.0', 'TinyDB:1.0', 'TinyDBIndexAnnotation:1.0'
-  , 'TinyDeprecatedAnnotation:1.0'];
+$dependencies = ['TinyCLI:1.0', 'TinyDB:1.0'];
 
+
+$dependencies[] = 'TinyDBIndexAnnotation:1.0';
+$annotation_processors[] = 'TinyDBIndexAnnotationProcessor:1.0';
+
+$dependencies[] = 'TinyDBIndexDeprecatedAnnotation:1.0';
+$annotation_processors[] = 'TinyDBIndexDeprecatedAnnotationProcessor:1.0';
+
+$dependencies[] = 'TinyEvent:1.0';
+$dependencies[] = 'TinyEventCenterRegistratorAnnotation:1.0';
+$annotation_processors[] = 'TinyEventCenterRegistratorAnnotationProcessor:1.0';
 
 //$publish = [
 //  'repo'=> "../lib",
