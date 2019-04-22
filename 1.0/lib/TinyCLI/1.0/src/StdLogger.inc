@@ -83,7 +83,7 @@ class StdLogger extends Logger {
       , $message, $throwable, self::RED);
 
     // fatal, stop
-    throw new NormalError("");
+    throw new NormalError("fatal error, exit");
   }
 
 //  private function format(int $needLevel, string $type
