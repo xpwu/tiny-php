@@ -20,8 +20,13 @@ php/tiny/event/EventCenterAutoEventData.inc
 php/tiny/build/AutoLoader.inc
 
 *.phar
+demo/**/build/inte/**
+demo/**/lib
 1.0/*/build/inte/**
 1.0/*/lib
 1.0/lib/InteCore
 1.0/lib/InteCoreAnnotation
 
+1.0/phpinte.sh
+1.0/allDir
+.gitignore
