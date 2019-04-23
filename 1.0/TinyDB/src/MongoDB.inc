@@ -25,31 +25,40 @@ class MongoDB {
     $this->passwd_ = $passwd;
   }
 
-  protected function getNs():string {
+  /**
+   * @deprecated
+   */
+  public function getNs():string {
     return $this->dbName_.".".$this->col_;
   }
 
   /**
-   * 获取表名
-   * @return string
+   * @deprecated
    */
-  protected function getCol():string {
+  public function getCol():string {
     return $this->col_;
   }
 
   /**
-   * 获取数据库名称
-   * @return string
+   * @deprecated
    */
-  protected function getDB():string {
+  public function getDB():string {
     return $this->dbName_;
   }
 
-  /**
-   * 获取连接对象
-   * @return Manager
-   */
-  protected function getManager():Manager {
+  public function getNamespace():string {
+    return $this->dbName_.".".$this->col_;
+  }
+
+  public function getCollection():string {
+    return $this->col_;
+  }
+
+  public function getDBName():string {
+    return $this->dbName_;
+  }
+
+  public function getManager():Manager {
 
     if ($this->manager_ === null) {
       if ($this->passwd_ !== null && $this->user_ !== null) {

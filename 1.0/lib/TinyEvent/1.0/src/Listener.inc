@@ -12,6 +12,10 @@ namespace Tiny\Event;
 use Tiny\Logger;
 
 abstract class Listener {
+  /**
+   * Listener constructor.
+   * @param Event $event
+   */
   function __construct(Event $event) {
     $this->event_ = $event;
   }

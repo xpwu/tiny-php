@@ -16,22 +16,35 @@ use Tiny\Logger;
 
 class EventCenter {
 
-  private function __construct(Name $name) {
+  protected function __construct(Name $name) {
     $this->name_ = $name;
   }
 
-  static public function default() {
+  static public function default():EventCenter {
     return new EventCenter(DefaultName::toName());
   }
 
-  static public function byName(Name $name) {
+  static public function byName(Name $name):EventCenter {
     return new EventCenter($name);
   }
 
-//  public function addListener(Listener $listener) {
+  /**
+   * @param Listener $listener
+   * @param ListeningMode $mode
+   *
+   * 为了与原来的兼容，调用event->toAll 后，这里即使使用 useEventArgs Mode, 也仍然会按照
+   * notUseEventArgs 的方式运行
+   *
+   */
+  public function addListenerWithMode(Listener $listener, ListeningMode $mode) {
+    // todo: 默认实现为动态注册,后续实现 这里不实现不影响自动注册，仍可调用
 //    $listener->getEvent()->addHandler($listener->getClassSign());
-//  }
-//
+  }
+
+  public function addListener(Listener $listener) {
+    $this->addListenerWithMode($listener, ListeningMode::useEventArgs());
+  }
+
 //  public function removeListener(Listener $listener) {
 //    $listener->getEvent()->removeHandler($listener->getClassSign());
 //  }

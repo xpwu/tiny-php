@@ -9,9 +9,6 @@ use Tiny\Event\EventCenter;
 use Tiny\Event\Listener;
 
 interface AutoRegistrator extends Annotation {
-  /**
-   * @return Listener[]
-   */
-  function needRegisterListeners():array ;
+  function addListeners(EventCenter $eventCenter):void ;
   function registerToEventCenter():EventCenter;
 }

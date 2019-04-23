@@ -20,7 +20,7 @@ class NamedECCLI extends CLI {
       Logger::getInstance()->fatal("参数错误，请-h查看");
     }
 
-    EventCenter::byName(Named::toName())->postEvent(new Event((int)$argv[0], 1000));
+    EventCenter::byName(Named::toName())->postEvent(new Event((int)$argv[0], "named"));
   }
 
   /**

@@ -9,6 +9,7 @@ namespace TinyEventCenterRegistratorAnnotationProcessor;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\Event\Annotation\Processor\EventCenterAutoRegistratorProcessor" => "src/EventCenterAutoRegistratorProcessor.inc",
+		"Tiny\Event\Annotation\Processor\AutoRegistratorEventCenter" => "src/AutoRegistratorEventCenter.inc",
+		"Tiny\Event\Annotation\Processor\AutoRegistratorProcessor" => "src/AutoRegistratorProcessor.inc",
   ];
 }

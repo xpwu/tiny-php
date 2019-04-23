@@ -21,6 +21,6 @@ $publish = [
   'name'=> "TinyEventCenterRegistratorAnnotationProcessor",
   'version'=>"1.0",
   'annotation_services'
-    => [\Tiny\Event\Annotation\Processor\EventCenterAutoRegistratorProcessor::class]
+    => [\Tiny\Event\Annotation\Processor\AutoRegistratorProcessor::class]
 ];
 

@@ -15,7 +15,7 @@ class AutoRegistrator extends EventCenterAutoRegistrator {
    * @return Listener
    */
   protected function listener(): Listener {
-    return new \Demo\CLI\Event\Listener(new Event(10, 15));
+    return new \Demo\CLI\Event\Listener(new Event(10, "EventCenterAutoRegistrator - 10"));
   }
 }
 
@@ -26,7 +26,7 @@ class AutoRegistrator2 extends EventCenterAutoRegistrator {
    * @return Listener
    */
   protected function listener(): Listener {
-    $event = new Event(14, 15);
+    $event = new Event(14, "EventCenterAutoRegistrator - all");
     $event->toAll();
     return new \Demo\CLI\Event\Listener($event);
   }

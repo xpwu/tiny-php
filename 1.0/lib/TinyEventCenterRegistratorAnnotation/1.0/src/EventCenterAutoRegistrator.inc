@@ -25,14 +25,11 @@ abstract class EventCenterAutoRegistrator implements Annotation, AutoRegistrator
    */
   abstract protected function listener():Listener ;
 
-   /**
-    * @return Listener[]
-    */
-   function needRegisterListeners(): array {
-     return [$this->listener()];
-   }
-
    function registerToEventCenter(): EventCenter {
      return EventCenter::default();
+   }
+
+   function addListeners(EventCenter $eventCenter): void {
+     $eventCenter->addListener($this->listener());
    }
  }

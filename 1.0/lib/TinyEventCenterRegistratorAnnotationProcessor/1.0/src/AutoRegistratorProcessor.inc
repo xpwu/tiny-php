@@ -14,7 +14,7 @@ use Tiny\Event\Center\AutoRegistratorHelper;
 use Tiny\Event\EventCenter;
 use Tiny\Event\Listener;
 
-class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
+class AutoRegistratorProcessor extends AbstractAnnotationServer {
 
   /**
    * @param string[] $classes
@@ -57,10 +57,13 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
          * @var $autoRegistrator AutoRegistrator
          */
         $autoRegistrator = new $class;
+        $ec = $autoRegistrator->registerToEventCenter();
+        $tmpEc = AutoRegistratorEventCenter::defaultAuto();
+        $autoRegistrator->addListeners($tmpEc);
 
-        $listeners = $autoRegistrator->needRegisterListeners();
+        $listeners = $tmpEc->getAllListeners();
         foreach ($listeners as $listener) {
-          $this->register($autoRegistrator->registerToEventCenter(), $listener);
+          $this->register($ec, $listener);
         }
       }
     }

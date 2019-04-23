@@ -19,7 +19,7 @@ class ECCLI extends CLI {
       Logger::getInstance()->fatal("参数错误，请-h查看");
     }
 
-    EventCenter::default()->postEvent(new Event((int)$argv[0], 30));
+    EventCenter::default()->postEvent(new Event((int)$argv[0], "default"));
   }
 
   /**

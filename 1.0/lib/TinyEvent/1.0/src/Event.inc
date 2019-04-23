@@ -9,6 +9,11 @@
 namespace Tiny\Event;
 
 
+
+/**
+ * Class Event
+ * @package Tiny\Event
+ */
 class Event {
   /**
    * Event constructor.
@@ -16,7 +21,15 @@ class Event {
    * $argId  子事件中，参与事件编码的参数 组合成的字符串，
    *      如果参数无需参与Id编码，直接传入空字符串。
    */
-  function __construct(string $argId) {
+  public function __construct(EventArg... $eventArgs) {
+    self::__constructOld(implode("_", $eventArgs));
+  }
+
+  /**
+   * @param string $argId
+   * @deprecated
+   */
+  function __constructOld(string $argId) {
     $this->idFactory_ = new ArgEventIdFactory();
     $this->argId_ = $argId;
   }
@@ -25,11 +38,11 @@ class Event {
     return $this->idFactory_->getId(get_class($this), $this->argId_);
   }
 
-  public function canAutoRegister():bool {
-    return true;
-  }
+//  public function canAutoRegister():bool {
+//    return true;
+//  }
 
-  protected function setIdFactory(EventIdFactory $eventIdFactory) {
+  public function setIdFactory(EventIdFactory $eventIdFactory) {
     $this->idFactory_ = $eventIdFactory;
   }
 
@@ -65,9 +78,12 @@ class Event {
     return $ret;
   }
 
-  public function toAll():self {
+  /**
+   * 即将废弃，请尽快使用新的代码
+   * @deprecated
+   */
+  public function toAll() {
     $this->setIdFactory(new AllEventIdFactory());
-    return $this;
   }
 
   public function handlerError() {}
@@ -84,7 +100,13 @@ class Event {
 //    $eventData->delHandler($handler);
 //  }
 
+  /**
+   * @var EventIdFactory
+   */
   private $idFactory_;
+  /**
+   * @var string
+   */
   private $argId_;
 
 }
