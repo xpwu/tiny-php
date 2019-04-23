@@ -32,7 +32,8 @@ class CreateIndex extends CLI {
       echo "---------------" . PHP_EOL;
 
       foreach ($all as $needCreateIndex) {
-        echo  get_class($needCreateIndex) . " ---> "
+        echo  str_replace("\\", "\\\\", get_class($needCreateIndex))
+          . " ---> "
           . $needCreateIndex::description() . PHP_EOL;
       }
 
@@ -60,7 +61,7 @@ class CreateIndex extends CLI {
 
       }
 
-      Logger::getInstance()->info("CreateIndex over!");
+      Logger::getInstance()->info("CreateIndexCLI run over!");
 
       return;
     }

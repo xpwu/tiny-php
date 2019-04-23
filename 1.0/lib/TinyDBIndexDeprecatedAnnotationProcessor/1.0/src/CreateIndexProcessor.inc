@@ -55,6 +55,10 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
   }
 
   private function write() {
+    if (count($this->all_) === 0) {
+      return;
+    }
+
     $fileName = AllOldCreateIndexInterfaceHelper::getFileDirAndName();
     $className = AllOldCreateIndexInterfaceHelper::getCreatedClassName();
     $nameSpace = AllOldCreateIndexInterfaceHelper::getNameSpace();

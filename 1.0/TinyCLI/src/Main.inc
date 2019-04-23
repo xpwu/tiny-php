@@ -15,10 +15,7 @@ use Tiny\Logger;
 
 class Main {
 
-  static public function main() {
-
-    date_default_timezone_set('PRC'); // 设置时区
-
+  public function prepare() {
     Logger::setConcreteLogger(new StdLogger());
 
 
@@ -41,10 +38,23 @@ class Main {
     set_exception_handler(function (\Throwable $exception) {
       Logger::getInstance()->fatal("", $exception);
     });
+  }
 
+  static public function main() {
+    date_default_timezone_set('PRC'); // 设置时区
 
     try {
+      /**
+       * Options 必须是用到自己类之前的第一句代码，主要是要
+       * 加载配置文件，如果在运行其他类时(尤其是logger)加载了配置配置
+       * 中的类，将造成无法加载配置文件
+       *
+       */
       $options = new Options();
+
+      $main = new Main();
+      $main->prepare();
+
       $options->getCommand()->run();
       exit(0);
     }catch (OK $error) {

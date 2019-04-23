@@ -18,6 +18,7 @@ $annotation_processors = ['TinyCLIAnnotationProcessor:1.0'];
 
 $dependencies = ['TinyCLI:1.0', 'TinyDB:1.0'];
 
+$annotation_processors[] = 'TinyCoreAnnotationProcessor:1.0';
 
 $dependencies[] = 'TinyDBIndexAnnotation:1.0';
 $annotation_processors[] = 'TinyDBIndexAnnotationProcessor:1.0';
@@ -29,6 +30,7 @@ $dependencies[] = 'TinyEvent:1.0';
 $dependencies[] = 'TinyEventCenterRegistratorAnnotation:1.0';
 $annotation_processors[] = 'TinyEventCenterRegistratorAnnotationProcessor:1.0';
 
+$dependencies[] = 'TinyDeprecatedLogic:1.0';
 //$publish = [
 //  'repo'=> "../lib",
 //  'name'=> "TinyCLI",

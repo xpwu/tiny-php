@@ -37,7 +37,7 @@ class EventCenter {
    *
    */
   public function addListenerWithMode(Listener $listener, ListeningMode $mode) {
-    // todo: 默认实现为动态注册 这里不实现不影响自动注册，仍可调用
+    // todo: 默认实现为动态注册,后续实现 这里不实现不影响自动注册，仍可调用
 //    $listener->getEvent()->addHandler($listener->getClassSign());
   }
 
