@@ -85,7 +85,7 @@ class EventCenterAutoRegistratorProcessor extends AbstractAnnotationServer {
     }
 
     $classSigns[] = $listenerClassSing;
-    $eventMap[$eventId] = $classSigns;
+    $eventMap[$eventId] = array_unique($classSigns);
     $this->nameEventMap_[$name] = $eventMap;
   }
 

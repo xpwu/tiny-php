@@ -71,8 +71,11 @@ class EventCenter {
         , $helper->getAllListenerClassSignByEventID($id));
     }
 
+    // 相同的监听者  只是发一次，  可能出现All 与 带参数的事件都监听了
+    $listenerClassSigns = array_unique($listenerClassSigns);
+
     /**
-     * @var $listenerClassSign Listener
+     * @var $listenerClassSign ListenerClassSign
      */
     foreach ($listenerClassSigns as $listenerClassSign) {
       Logger::getInstance()->debug("postEvent: Event("
