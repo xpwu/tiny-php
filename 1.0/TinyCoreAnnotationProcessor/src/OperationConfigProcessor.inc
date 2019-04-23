@@ -121,6 +121,10 @@ EOF;
       return "'" . $value . "'";
     }
 
+    if (is_bool($value)) {
+      return $value?'true':'false';
+    }
+
     // 根据前面检查的逻辑，这里可能为：int float
     if (!is_array($value)) {
       return (string)$value;
@@ -190,7 +194,7 @@ EOF;
 
   private function isValidValue($value):bool {
     if (is_int($value) || is_float($value)
-      || is_string($value)) {
+      || is_string($value) || is_bool($value)) {
       return true;
     }
 
