@@ -28,10 +28,20 @@ class Main {
       ini_set('error_log', "error.log");
     }
 
-    function exception_error_handler($errno, $errStr, $errFile, $errLine ) {
+    set_error_handler(function($errno, $errStr, $errFile, $errLine ) {
+      /**
+       * https://www.php.net/manual/zh/language.operators.errorcontrol.php
+       * 错误控制运算符：@ 标注的忽略错误不再输出
+       */
+      if (error_reporting() === 0) {
+        return false;
+      }
+
       throw new \ErrorException($errStr, 0, $errno, $errFile, $errLine);
-    }
-    set_error_handler("exception_error_handler");
+    });
+
+    $logger = Config::logger;
+    Logger::setConcreteLogger(new $logger());
 
     $response = new Response();
     unset($response->data);
