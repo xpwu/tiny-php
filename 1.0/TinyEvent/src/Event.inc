@@ -19,7 +19,7 @@ class Event {
    * Event constructor.
    * @param string $argId
    * $argId  子事件中，参与事件编码的参数 组合成的字符串，
-   *      如果参数无需参与Id编码，直接传入空字符串。
+   *      如果参数无需参与Id编码，不需传入参数。
    */
   public function __construct(EventArg... $eventArgs) {
     self::__constructOld(implode("_", $eventArgs));
@@ -29,7 +29,7 @@ class Event {
    * @param string $argId
    * @deprecated
    */
-  function __constructOld(string $argId) {
+  private function __constructOld(string $argId) {
     $this->idFactory_ = new ArgEventIdFactory();
     $this->argId_ = $argId;
   }
