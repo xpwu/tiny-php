@@ -55,7 +55,7 @@ class AnnotationHelper {
     , string $fileSuffix = ".inc"):string {
 
     $name = explode('\\', self::getNameSpace($shouldCreateFileClass));
-    $name[] = self::getCreatedClassName($shouldCreateFileClass) . $fileSuffix;
+    $name[] = self::getCreatedClassName($shouldCreateFileClass, "") . $fileSuffix;
     return implode('/', $name);
   }
 
