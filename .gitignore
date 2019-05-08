@@ -33,3 +33,6 @@ demo/**/lib
 demo/APIDemo/error.log
 demo/APIDemo/input
 demo/APIDemo/output
+1.0/lib/InteAnnotationHelper
+1.0/lib/InteCheckNamespaceAndPublishName
+1.0/lib/InteMetaAnnotation
