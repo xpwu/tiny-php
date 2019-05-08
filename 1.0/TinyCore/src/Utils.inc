@@ -14,7 +14,6 @@ class Utils {
   static public function fullClassNameToFullFileName(
     string $className, string $ext = ".inc"):string {
     $name = explode('\\', $className);
-    $name[] = $ext;
-    return implode('/', $name);
+    return implode('/', $name).$ext;
   }
 }
