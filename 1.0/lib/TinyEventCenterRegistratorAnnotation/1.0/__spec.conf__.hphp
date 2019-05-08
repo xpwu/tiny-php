@@ -3,6 +3,6 @@
 $name = "TinyEventCenterRegistratorAnnotation";
 $version = "1.0";
 
-$dependencies = ["TinyEvent:1.0","InteCoreAnnotation:1.0"];
+$dependencies = ["TinyEvent:1.0","InteCoreAnnotation:1.0","InteMetaAnnotation:1.0"];
 
 

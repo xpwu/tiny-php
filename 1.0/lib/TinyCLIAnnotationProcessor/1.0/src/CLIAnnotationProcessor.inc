@@ -6,6 +6,7 @@ namespace Tiny;
 
 use Inte\Annotation\AbstractAnnotationServer;
 use Inte\Annotation\Config;
+use Inte\Annotation\Helper;
 use Inte\Annotation\Logger;
 use Inte\Annotation\PhpFiler;
 use Tiny\CLI\Annotation\AllCLIAnnotation;
@@ -19,19 +20,7 @@ class CLIAnnotationProcessor extends AbstractAnnotationServer {
    * @throws \ReflectionException
    */
   function process(array $classes): void {
-    if (!$this->isBuild_) {
-      return;
-    }
-
-    foreach ($classes as $class) {
-      $clazz = new \ReflectionClass($class);
-      if ($clazz->isSubclassOf(CLIAnnotation::class)
-        && !$clazz->isAbstract() && !$clazz->isInterface()) {
-        $this->allCli_[] = $class;
-      }
-    }
-
-    $this->write();
+    $this->processClasses($classes);
   }
 
 
@@ -40,13 +29,24 @@ class CLIAnnotationProcessor extends AbstractAnnotationServer {
    * @throws \ReflectionException
    */
   public function processDependencyClasses(array $dependencyClasses): void {
+    $this->processClasses($dependencyClasses);
+  }
+
+  /**
+   * @param array $classes
+   * @throws \ReflectionException
+   */
+  private function processClasses(array $classes):void {
     if (!$this->isBuild_) {
       return;
     }
 
-    foreach ($dependencyClasses as $dependencyClass) {
+    $helper = new Helper(new \ReflectionClass(CLIAnnotation::class)
+      , $this->logger_);
+
+    foreach ($classes as $dependencyClass) {
       $clazz = new \ReflectionClass($dependencyClass);
-      if ($clazz->isSubclassOf(CLIAnnotation::class)
+      if ($helper->isAnnotatingClass($clazz)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         $this->allCli_[] = $dependencyClass;
       }

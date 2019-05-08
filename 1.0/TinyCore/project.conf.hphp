@@ -14,8 +14,6 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "../lib";
 
-$annotation_processors = ['TinyCoreAnnotationProcessor:1.0'];
-
 $dependencies = ['TinyCoreAnnotation:1.0'];
 
 $publish = [

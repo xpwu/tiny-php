@@ -20,6 +20,7 @@ $publish = [
   'repo'=> "../lib",
   'name'=> "TinyDBIndexDeprecatedAnnotationProcessor",
   'version'=>"1.0",
-  'annotation_services' => [\Tiny\Annotation\Processor\CreateIndexProcessor::class]
+  'annotation_services'
+    => [\Tiny\DBIndex\Deprecated\Annotation\Processor\CreateIndexProcessor::class]
 ];
 

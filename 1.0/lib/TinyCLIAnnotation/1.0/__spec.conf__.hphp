@@ -3,6 +3,6 @@
 $name = "TinyCLIAnnotation";
 $version = "1.0";
 
-$dependencies = ["TinyAnnotationHelper:1.0","InteCoreAnnotation:1.0"];
+$dependencies = ["TinyAnnotationHelper:1.0","InteMetaAnnotation:1.0"];
 
 

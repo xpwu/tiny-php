@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tiny\DB\Annotation\Processor;
+namespace Tiny\DBIndex\Annotation\Processor;
 
 
 use Inte\Annotation\AbstractAnnotationServer;

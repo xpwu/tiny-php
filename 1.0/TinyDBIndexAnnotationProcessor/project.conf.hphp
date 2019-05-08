@@ -14,12 +14,16 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "../lib";
 
-$dependencies = ['TinyDBIndexAnnotation:1.0', 'TinyAnnotationHelper:1.0'];
+$annotation_processors = [];
+$annotation_processors[] = 'InteCheckNamespaceAndPublishName:1.0';
+
+$dependencies = ['TinyDBIndexAnnotation:1.0', 'InteAnnotationHelper:1.0'];
 
 $publish = [
   'repo'=> "../lib",
   'name'=> "TinyDBIndexAnnotationProcessor",
   'version'=>"1.0",
-  'annotation_services' => [\Tiny\DB\Annotation\Processor\NeedCreateIndexProcessor::class]
+  'annotation_services'
+    => [\Tiny\DBIndex\Annotation\Processor\NeedCreateIndexProcessor::class]
 ];
 

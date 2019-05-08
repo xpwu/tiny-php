@@ -14,13 +14,18 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "../lib";
 
-$dependencies = ['TinyCoreAnnotation:1.0'];
+$annotation_processors = [];
+$annotation_processors[] = 'InteCheckNamespaceAndPublishName:1.0';
+
+$dependencies = ['TinyCoreAnnotation:1.0', 'InteAnnotationHelper:1.0'
+  , 'InteCoreAnnotation:1.0'];
 
 
 $publish = [
   'repo'=> "../lib",
   'name'=> "TinyCoreAnnotationProcessor",
   'version'=>"1.0",
-  'annotation_services' => [\Tiny\Annotation\Processor\OperationConfigProcessor::class]
+  'annotation_services'
+    => [\Tiny\Core\Annotation\Processor\OperationConfigProcessor::class]
 ];
 

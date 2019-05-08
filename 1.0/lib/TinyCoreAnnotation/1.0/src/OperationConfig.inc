@@ -4,7 +4,8 @@
 namespace Tiny\Core\Annotation;
 
 
-use Inte\Annotation;
+
+use Inte\MetaAnnotation\Annotation;
 
 interface OperationConfig extends Annotation {
 }

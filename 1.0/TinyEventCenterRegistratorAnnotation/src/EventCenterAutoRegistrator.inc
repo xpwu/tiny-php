@@ -9,7 +9,7 @@
 namespace Tiny\Event;
 
 
-use Inte\Annotation;
+use Inte\MetaAnnotation\Annotation;
 use Tiny\Event\Center\Annotation\AutoRegistrator;
 
 /**
@@ -17,7 +17,8 @@ use Tiny\Event\Center\Annotation\AutoRegistrator;
  * @package Tiny\Event
  * @deprecated
  */
-abstract class EventCenterAutoRegistrator implements Annotation, AutoRegistrator {
+abstract class EventCenterAutoRegistrator implements Annotation
+  , AutoRegistrator {
 
   /**
    * 返回要自动注册的Listener

@@ -16,6 +16,7 @@ $anno_and_dep_repo = "../lib";
 
 $annotation_processors = ['TinyCoreAnnotationProcessor:1.0'];
 
+
 $dependencies = ['TinyCore:1.0'];
 
 $publish = [

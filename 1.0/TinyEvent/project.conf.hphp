@@ -12,6 +12,9 @@ $src = ['src/**/*.inc'];
 
 $anno_and_dep_repo = "../lib";
 
+$annotation_processors = [];
+$annotation_processors[] = 'InteCheckNamespaceAndPublishName:1.0';
+
 $dependencies = ['TinyAnnotationHelper:1.0'];
 
 $publish = [

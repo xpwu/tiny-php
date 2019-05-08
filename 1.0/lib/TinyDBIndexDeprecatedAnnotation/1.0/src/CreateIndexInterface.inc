@@ -8,7 +8,8 @@
 
 namespace Tiny\DB;
 
-use Inte\Annotation;
+
+use Inte\MetaAnnotation\Annotation;
 
 /**
  * Interface CreateIndexInterface

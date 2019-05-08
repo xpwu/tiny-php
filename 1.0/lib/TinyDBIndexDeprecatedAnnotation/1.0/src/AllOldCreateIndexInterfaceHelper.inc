@@ -4,14 +4,15 @@
 namespace Tiny\Deprecated\Annotation;
 
 
-use Inte\Annotation;
+use Inte\MetaAnnotation\Annotation;
+use Inte\MetaAnnotation\Inherited;
 use Tiny\AnnotationHelper;
 use Tiny\DB\CreateIndexInterface;
 use Tiny\DB\Index\Annotation\NeedCreateIndex;
 use Tiny\Logger;
 
 abstract class AllOldCreateIndexInterfaceHelper extends AnnotationHelper
-  implements Annotation, NeedCreateIndex {
+  implements Annotation, Inherited, NeedCreateIndex {
 
   static function createIndex():void {
     /**

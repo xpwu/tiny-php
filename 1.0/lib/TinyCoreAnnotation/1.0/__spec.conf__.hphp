@@ -3,6 +3,6 @@
 $name = "TinyCoreAnnotation";
 $version = "1.0";
 
-$dependencies = ["InteCoreAnnotation:1.0"];
+$dependencies = ["InteMetaAnnotation:1.0"];
 
 

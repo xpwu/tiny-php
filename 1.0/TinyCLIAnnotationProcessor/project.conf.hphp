@@ -15,8 +15,10 @@ $exclude_src = [];
 $anno_and_dep_repo = "../lib";
 
 $annotation_processors = [];
+$annotation_processors[] = 'InteCheckNamespaceAndPublishName:1.0';
 
-$dependencies = ['TinyCLIAnnotation:1.0'];
+$dependencies = ['TinyCLIAnnotation:1.0','InteAnnotationHelper:1.0'
+  , 'InteCoreAnnotation:1.0'];
 
 $publish = [
   'repo'=> "../lib",

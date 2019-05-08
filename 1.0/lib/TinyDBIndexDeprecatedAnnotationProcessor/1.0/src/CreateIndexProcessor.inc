@@ -1,11 +1,12 @@
 <?php
 
 
-namespace Tiny\Annotation\Processor;
+namespace Tiny\DBIndex\Deprecated\Annotation\Processor;
 
 
 use Inte\Annotation\AbstractAnnotationServer;
 use Inte\Annotation\Config;
+use Inte\Annotation\Helper;
 use Inte\Annotation\Logger;
 use Inte\Annotation\PhpFiler;
 use Tiny\Core\Utils;
@@ -18,19 +19,7 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
    * @throws \ReflectionException
    */
   function process(array $classes): void {
-    if (!$this->isBuild_) {
-      return;
-    }
-
-    foreach ($classes as $class) {
-      $clazz = new \ReflectionClass($class);
-      if ($clazz->isSubclassOf(CreateIndexInterface::class)
-        && !$clazz->isAbstract() && !$clazz->isInterface()) {
-        $this->all_[] = $class;
-      }
-    }
-
-    $this->write();
+    $this->processClasses($classes);
   }
 
 
@@ -39,15 +28,24 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
    * @throws \ReflectionException
    */
   public function processDependencyClasses(array $dependencyClasses): void {
+    $this->processClasses($dependencyClasses);
+  }
+
+  /**
+   * @param array $classes
+   * @throws \ReflectionException
+   */
+  private function processClasses(array $classes):void {
     if (!$this->isBuild_) {
       return;
     }
 
-    foreach ($dependencyClasses as $dependencyClass) {
-      $clazz = new \ReflectionClass($dependencyClass);
-      if ($clazz->isSubclassOf(CreateIndexInterface::class)
+    $helper = new Helper(CreateIndexInterface::class, $this->logger_);
+    foreach ($classes as $class) {
+      $clazz = new \ReflectionClass($class);
+      if ($helper->isAnnotatingClass($clazz)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
-        $this->all_[] = $dependencyClass;
+        $this->all_[] = $class;
       }
     }
 

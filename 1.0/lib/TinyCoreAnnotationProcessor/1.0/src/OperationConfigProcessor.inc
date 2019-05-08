@@ -1,11 +1,12 @@
 <?php
 
 
-namespace Tiny\Annotation\Processor;
+namespace Tiny\Core\Annotation\Processor;
 
 
 use Inte\Annotation\AbstractAnnotationServer;
 use Inte\Annotation\Config;
+use Inte\Annotation\Helper;
 use Inte\Annotation\Logger;
 use Inte\Annotation\PhpFiler;
 use ReflectionClass;
@@ -22,9 +23,12 @@ class OperationConfigProcessor extends AbstractAnnotationServer {
      * @var ReflectionClass
      */
     $allConfigs = [];
+    $helper = new Helper(new ReflectionClass(OperationConfig::class)
+      , $this->logger_);
+
     foreach ($classes as $class) {
       $refClass = new ReflectionClass($class);
-      if ($refClass->isSubclassOf(OperationConfig::class)) {
+      if ($helper->isAnnotatingClass($refClass)) {
         $allConfigs[] = $refClass;
       }
     }
@@ -50,9 +54,12 @@ class OperationConfigProcessor extends AbstractAnnotationServer {
      * @var ReflectionClass
      */
     $allConfigs = [];
+    $helper = new Helper(new ReflectionClass(OperationConfig::class)
+      , $this->logger_);
+
     foreach ($dependencyClasses as $class) {
       $refClass = new ReflectionClass($class);
-      if ($refClass->isSubclassOf(OperationConfig::class)) {
+      if ($helper->isAnnotatingClass($refClass)) {
         $allConfigs[] = $refClass;
       }
     }

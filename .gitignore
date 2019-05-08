@@ -30,3 +30,6 @@ demo/**/lib
 1.0/phpinte.sh
 1.0/allDir
 .gitignore
+demo/APIDemo/error.log
+demo/APIDemo/input
+demo/APIDemo/output

@@ -14,8 +14,7 @@ $exclude_src = [];
 
 $anno_and_dep_repo = "../lib";
 
-$dependencies = ['TinyDBIndexAnnotation:1.0'
-  , 'TinyEventCenterRegistratorAnnotation:1.0'];
+$dependencies = ['TinyDBIndexAnnotation:1.0'];
 
 $publish = [
   'repo'=> "../lib",

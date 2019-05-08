@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tiny\Event\Annotation\Processor;
+namespace Tiny\Event\CenterRegistrator\Annotation\Processor;
 
 
 use Tiny\Event\Center\DefaultName;

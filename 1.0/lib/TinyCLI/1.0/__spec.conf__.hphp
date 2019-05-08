@@ -1,8 +1,0 @@
-<?php
-
-$name = "TinyCLI";
-$version = "1.0";
-
-$dependencies = ["TinyCore:1.0","TinyCLIAnnotation:1.0","TinyDBIndexAnnotation:1.0","InteCore:1.0"];
-
-
