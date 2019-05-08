@@ -40,7 +40,8 @@ class CreateIndexProcessor extends AbstractAnnotationServer {
       return;
     }
 
-    $helper = new Helper(CreateIndexInterface::class, $this->logger_);
+    $helper = new Helper(
+      new \ReflectionClass(CreateIndexInterface::class), $this->logger_);
     foreach ($classes as $class) {
       $clazz = new \ReflectionClass($class);
       if ($helper->isAnnotatingClass($clazz)

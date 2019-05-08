@@ -6,6 +6,7 @@ namespace Tiny\Event\CenterRegistrator\Annotation\Processor;
 
 use Inte\Annotation\AbstractAnnotationServer;
 use Inte\Annotation\Config;
+use Inte\Annotation\Helper;
 use Inte\Annotation\Logger;
 use Inte\Annotation\PhpFiler;
 use Tiny\Core\Utils;
@@ -49,9 +50,11 @@ class AutoRegistratorProcessor extends AbstractAnnotationServer {
    * @throws \ReflectionException
    */
   private function processClasses(array $classes):void {
+    $annotationHelper = new Helper(
+      new \ReflectionClass(AutoRegistrator::class), $this->logger_);
     foreach ($classes as $class) {
       $clazz = new \ReflectionClass($class);
-      if ($clazz->isSubclassOf(AutoRegistrator::class)
+      if ($annotationHelper->isAnnotatingClass($clazz)
         && !$clazz->isAbstract() && !$clazz->isInterface()) {
         /**
          * @var $autoRegistrator AutoRegistrator
