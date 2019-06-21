@@ -128,7 +128,8 @@ class OperationConfigProcessor extends AbstractAnnotationServer {
   private function createAConfig(ReflectionClass $class):string {
     $ns = $class->getNamespaceName();
     $className = $class->getShortName();
-    $classDoc = $this->getDoc($class->getDocComment(), "", 'Class', '@');
+    $classDoc = $this->getDoc($class->getDocComment()
+      , "", 'Interface', 'Class', '@');
 
     $content = <<<EOF
 
