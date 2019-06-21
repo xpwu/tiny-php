@@ -13,11 +13,8 @@ use Tiny\Core\LoggerLevel\Off;
 use Tiny\Core\LoggerLevel\Trace;
 use Tiny\Core\LoggerLevel\Warn;
 
-/**
- *
- * Logger的相关配置
- */
-interface LoggerConfig extends Annotation\OperationConfig {
+
+interface LoggerConfig extends Annotation\OperationConfig, LogConfigGroup {
 
   /**
    * 下面是所有level的取值，按照顺序级别递增。此常量不需要修改

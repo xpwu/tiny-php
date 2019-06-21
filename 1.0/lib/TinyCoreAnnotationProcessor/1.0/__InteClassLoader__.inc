@@ -9,6 +9,6 @@ namespace TinyCoreAnnotationProcessor;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\Core\Annotation\Processor\OperationConfigProcessor" => "src/OperationConfigProcessor.inc",
+		'Tiny\Core\Annotation\Processor\OperationConfigProcessor' => 'src/OperationConfigProcessor.inc',
   ];
 }

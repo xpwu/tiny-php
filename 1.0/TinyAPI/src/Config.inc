@@ -5,13 +5,11 @@ namespace Tiny\API;
 
 
 use Tiny\Core\Annotation\OperationConfig;
+use Tiny\Core\LogConfigGroup;
 use Tiny\Log4PHPAdapter;
 
-/**
- *
- * TinyAPI 的配置
- */
-interface Config extends OperationConfig {
+
+interface Config extends OperationConfig, LogConfigGroup {
   /**
    * 配置项目使用的Logger库，默认使用Log4PHP
    * 使用该库，需要在项目中加入 TinyLog4PHPAdapter 依赖

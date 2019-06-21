@@ -4,7 +4,8 @@ tiny-php 是一个为PHP写服务的一些基础库，在此基础库上可以�
 
 
 ### <a name="TinyCore"></a>TinyCore
-本部分主要是Tiny的一些基础库，其中最重要的是OperationConfig的提供，可以方便的生成统一的配置文件模板，需要在项目集成时加入生成配置文件模板的注解处理器。生成的模板路径是 build/inte/annotation/src/operation_config.php 
+本部分主要是Tiny的一些基础库，其中最重要的是OperationConfig的提供，可以方便的生成统一的配置文件模板，需要在项目集成时加入生成配置文件模板的注解处理器。生成的模板路径是 build/inte/annotation/src/operation_config.php  
+支持生成的配置文件分组显示，可以使用ConfigGroup注解定义一个分组，定义配置时extends此分组即可。
 
 
 ### <a name="TinyDBIndex"></a>TinyDBIndex

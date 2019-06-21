@@ -9,6 +9,7 @@ namespace TinyCoreAnnotation;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\Core\Annotation\OperationConfig" => "src/OperationConfig.inc",
+		'Tiny\Core\Annotation\ConfigGroup' => 'src/ConfigGroup.inc',
+		'Tiny\Core\Annotation\OperationConfig' => 'src/OperationConfig.inc',
   ];
 }
