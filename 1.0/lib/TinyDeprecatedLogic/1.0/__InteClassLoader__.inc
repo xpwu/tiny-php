@@ -9,7 +9,7 @@ namespace TinyDeprecatedLogic;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\DB\MongodbDefault" => "src/MongodbDefault.inc",
-		"Tiny\Deprecated\Logic\MongodbDefaultConfig" => "src/MongodbDefaultConfig.inc",
+		'Tiny\DB\MongodbDefault' => 'src/MongodbDefault.inc',
+		'Tiny\Deprecated\Logic\MongodbDefaultConfig' => 'src/MongodbDefaultConfig.inc',
   ];
 }

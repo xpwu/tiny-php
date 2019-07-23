@@ -9,6 +9,6 @@ namespace TinyDB;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\DB\MongoDB" => "src/MongoDB.inc",
+		'Tiny\DB\MongoDB' => 'src/MongoDB.inc',
   ];
 }

@@ -9,6 +9,6 @@ namespace TinyCLIAnnotationProcessor;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\CLIAnnotationProcessor" => "src/CLIAnnotationProcessor.inc",
+		'Tiny\CLIAnnotationProcessor' => 'src/CLIAnnotationProcessor.inc',
   ];
 }

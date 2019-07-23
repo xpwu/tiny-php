@@ -28,7 +28,7 @@ class NormalCommand implements Command {
     if (count($this->argv_) >= 1 && $this->argv_[0] == '-h') {
       echo "usage: php "
         . RunTime::default()->getPharBaseName()
-        . " ".$cmdName." ".$this->cli_->getHelp().PHP_EOL;
+        . " ".addslashes($cmdName) . " ".$this->cli_->getHelp().PHP_EOL;
 
       throw new CLI\OK();
     }

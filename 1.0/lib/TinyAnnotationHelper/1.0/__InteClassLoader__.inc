@@ -9,6 +9,6 @@ namespace TinyAnnotationHelper;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\AnnotationHelper" => "src/AnnotationHelper.inc",
+		'Tiny\AnnotationHelper' => 'src/AnnotationHelper.inc',
   ];
 }

@@ -9,6 +9,6 @@ namespace TinyDBIndexDeprecatedAnnotationProcessor;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\DBIndex\Deprecated\Annotation\Processor\CreateIndexProcessor" => "src/CreateIndexProcessor.inc",
+		'Tiny\DBIndex\Deprecated\Annotation\Processor\CreateIndexProcessor' => 'src/CreateIndexProcessor.inc',
   ];
 }

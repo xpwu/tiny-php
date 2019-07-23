@@ -9,7 +9,7 @@ namespace TinyDBIndexDeprecatedAnnotation;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\Deprecated\Annotation\AllOldCreateIndexInterfaceHelper" => "src/AllOldCreateIndexInterfaceHelper.inc",
-		"Tiny\DB\CreateIndexInterface" => "src/CreateIndexInterface.inc",
+		'Tiny\Deprecated\Annotation\AllOldCreateIndexInterfaceHelper' => 'src/AllOldCreateIndexInterfaceHelper.inc',
+		'Tiny\DB\CreateIndexInterface' => 'src/CreateIndexInterface.inc',
   ];
 }

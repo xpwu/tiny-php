@@ -9,7 +9,7 @@ namespace TinyDBIndexAnnotation;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\DB\Index\Annotation\AllNeedCreateIndex" => "src/AllNeedCreateIndex.inc",
-		"Tiny\DB\Index\Annotation\NeedCreateIndex" => "src/NeedCreateIndex.inc",
+		'Tiny\DB\Index\Annotation\AllNeedCreateIndex' => 'src/AllNeedCreateIndex.inc',
+		'Tiny\DB\Index\Annotation\NeedCreateIndex' => 'src/NeedCreateIndex.inc',
   ];
 }

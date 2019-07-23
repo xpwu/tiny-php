@@ -9,6 +9,6 @@ namespace TinyLog4PHPAdapter;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\Log4PHPAdapter" => "src/Log4PHPAdapter.inc",
+		'Tiny\Log4PHPAdapter' => 'src/Log4PHPAdapter.inc',
   ];
 }

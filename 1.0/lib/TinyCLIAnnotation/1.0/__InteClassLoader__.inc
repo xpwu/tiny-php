@@ -9,7 +9,7 @@ namespace TinyCLIAnnotation;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\CLI\Annotation\AllCLIAnnotation" => "src/AllCLIAnnotation.inc",
-		"Tiny\CLIAnnotation" => "src/CLIAnnotation.inc",
+		'Tiny\CLI\Annotation\AllCLIAnnotation' => 'src/AllCLIAnnotation.inc',
+		'Tiny\CLIAnnotation' => 'src/CLIAnnotation.inc',
   ];
 }

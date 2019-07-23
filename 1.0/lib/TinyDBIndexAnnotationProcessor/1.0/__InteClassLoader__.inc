@@ -9,6 +9,6 @@ namespace TinyDBIndexAnnotationProcessor;
 class ClassLoader {
   public const AllClasses = [
     
-		"Tiny\DBIndex\Annotation\Processor\NeedCreateIndexProcessor" => "src/NeedCreateIndexProcessor.inc",
+		'Tiny\DBIndex\Annotation\Processor\NeedCreateIndexProcessor' => 'src/NeedCreateIndexProcessor.inc',
   ];
 }
