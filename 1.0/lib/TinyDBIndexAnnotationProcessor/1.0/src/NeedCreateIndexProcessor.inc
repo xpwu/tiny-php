@@ -67,6 +67,8 @@ class NeedCreateIndexProcessor extends AbstractAnnotationServer {
 
 namespace $nameSpace;
 
+use Tiny\Logger;
+
 class $className extends $superClass {
 
   private \$all = [$all];
@@ -77,7 +79,13 @@ class $className extends $superClass {
   public function getAll():array  {
     \$ret = [];
     foreach (\$this->all as \$index) {
-      \$ret[] = new \$index();
+      try {
+        \$ref = new \ReflectionClass(\$index);
+      } catch (\ReflectionException \$e) {
+        Logger::getInstance()->error("按道理不应该找不到这个类", \$e);
+        continue;
+      }
+      \$ret[] = \$ref->newInstanceWithoutConstructor();
     }
     
     return \$ret;
