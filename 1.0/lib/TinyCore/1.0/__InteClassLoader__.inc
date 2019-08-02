@@ -12,6 +12,7 @@ class ClassLoader {
 		'Tiny\Core\LogConfigGroup' => 'src/LogConfigGroup.inc',
 		'Tiny\Logger' => 'src/Logger.inc',
 		'Tiny\Core\LoggerConfig' => 'src/LoggerConfig.inc',
+		'TinyCore\src\LoggerInfo' => 'src/LoggerInfo.inc',
 		'Tiny\Core\LoggerLevel' => 'src/LoggerLevel.inc',
 		'Tiny\Core\Time' => 'src/Time.inc',
 		'Tiny\Core\Utils' => 'src/Utils.inc',

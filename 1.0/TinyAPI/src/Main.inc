@@ -10,6 +10,7 @@
 namespace Tiny\API;
 
 use Tiny\API;
+use Tiny\Core\Utils;
 use Tiny\Logger;
 use Tiny\Request;
 use Tiny\Response;
@@ -48,7 +49,7 @@ class Main {
     try {
       // ----- request -----
       $request = new Request();
-      Logger::getInstance()->setRequest($request);
+      Logger::getInstance()->setAdditionalInfo($request);
 
       $request->api = explode('?', $_SERVER["REQUEST_URI"]);
       $api = explode('/', $request->api[0]);
@@ -60,6 +61,7 @@ class Main {
       $request->data = file_get_contents("php://input");
       $request->httpHeaders = $_SERVER;
       $request->uid = "";
+      $request->reqID = @$_SERVER['HTTP_REQID']??Utils::uniqRandomStr();
 
       // ----- api -----
 

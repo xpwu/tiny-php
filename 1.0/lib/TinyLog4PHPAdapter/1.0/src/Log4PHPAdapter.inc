@@ -76,8 +76,11 @@ class Log4PHPAdapter extends Logger {
 
   private function format(string $message):string {
     $this->getLocationInformation();
-    return $this->fullInfo."[uid:".$this->request->uid
-      .", api:".$this->request->api."] --- ".$message;
+    $add = "";
+    if ($this->additionalInfo !== null) {
+      $add = $this->additionalInfo->info();
+    }
+    return $this->fullInfo."[". $add ."] --- ".$message;
   }
 
   /**

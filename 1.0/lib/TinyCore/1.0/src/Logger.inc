@@ -12,6 +12,7 @@ namespace Tiny;
 use Tiny\Core\LoggerConfig;
 use Tiny\Core\LoggerLevel;
 use Tiny\Core\Time;
+use TinyCore\src\LoggerInfo;
 
 abstract class Logger {
 
@@ -59,8 +60,12 @@ abstract class Logger {
     $this->level = new $level();
   }
 
-  public function setRequest(Request $request) {
-    $this->request = $request;
+//  public function setRequest(Request $request) {
+//    $this->request = $request;
+//  }
+
+  public function setAdditionalInfo(LoggerInfo $additional) {
+    $this->additionalInfo = $additional;
   }
 
   abstract protected function init();
@@ -117,10 +122,15 @@ abstract class Logger {
    */
   protected $level;
 
+//  /**
+//   * @var Request
+//   */
+//  protected $request = null;
+
   /**
-   * @var Request
+   * @var LoggerInfo
    */
-  protected $request = null;
+  protected $additionalInfo = null;
 
   protected $line = null;
   protected $fileName = null;

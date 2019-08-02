@@ -16,4 +16,11 @@ class Utils {
     $name = explode('\\', $className);
     return implode('/', $name).$ext;
   }
+
+  static function uniqRandomStr():string {
+    define("AllStr", "QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm!@#$?|{/:%^&*()-_[]}<>~+=,.");
+
+    return sha1(uniqid(str_shuffle(AllStr), true)
+      . gethostname().microtime());
+  }
 }

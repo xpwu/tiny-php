@@ -9,9 +9,16 @@
 namespace Tiny;
 
 
-class Request {
+use TinyCore\src\LoggerInfo;
+
+class Request implements LoggerInfo {
   public $data;
   public $api;
   public $uid;
+  public $reqID;
   public $httpHeaders = [];
+
+  function info(): string {
+    return "uid:" . $this->uid . ", api:" . $this->api . ", reqid:" . $this->reqID;
+  }
 }
