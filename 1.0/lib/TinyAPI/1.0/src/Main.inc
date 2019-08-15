@@ -63,6 +63,8 @@ class Main {
       $request->uid = "";
       $request->reqID = @$_SERVER['HTTP_REQID']??Utils::uniqRandomStr();
 
+      $response->httpHeaders['REQID'] = $request->reqID;
+
       // ----- api -----
 
       Logger::getInstance()->info("start");
@@ -89,6 +91,7 @@ class Main {
     if ($response->httpStatus != \Tiny\HttpStatus::SUC) {
       Logger::getInstance()->fatal($response->httpStatusMsg);
       header("HTTP/1.1 ". $response->httpStatus." ".$response->httpStatusMsg);
+      header('REQID: '. $request->reqID);
       return;
     }
 
