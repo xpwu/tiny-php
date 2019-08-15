@@ -73,11 +73,11 @@ class Main {
         $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
         $response->httpStatusMsg = "API Not Found";
       } else {
-          /**
-           * @var $api API
-           */
-          $api = new $api;
-          $api->process($request, $response);
+        /**
+         * @var $api API
+         */
+        $api = new $api;
+        $api->process($request, $response);
       }
     } catch (\Exception $e) {
       $response->httpStatus = \Tiny\HttpStatus::FAILED;
@@ -91,7 +91,11 @@ class Main {
     if ($response->httpStatus != \Tiny\HttpStatus::SUC) {
       Logger::getInstance()->fatal($response->httpStatusMsg);
       header("HTTP/1.1 ". $response->httpStatus." ".$response->httpStatusMsg);
-      header('REQID: '. $request->reqID);
+
+      foreach ($response->httpHeaders as $header => $value) {
+        header($header.': '.$value);
+      }
+
       return;
     }
 
