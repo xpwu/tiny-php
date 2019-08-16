@@ -5,6 +5,9 @@ namespace Tiny\Core;
 
 
 class Utils {
+  private const AllStr = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwerty"
+    ."uiopasdfghjklzxcvbnm!@#$?|{/:%^&*()-_[]}<>~+=,.";
+
   static public function stringArray2string(array $strings):string {
     return implode(",", array_map(function (string $value){
       return PHP_EOL . "'" . $value . "'";
@@ -18,9 +21,8 @@ class Utils {
   }
 
   static function uniqRandomStr():string {
-    define("AllStr", "QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm!@#$?|{/:%^&*()-_[]}<>~+=,.");
 
-    return sha1(uniqid(str_shuffle(AllStr), true)
+    return sha1(uniqid(str_shuffle(self::AllStr), true)
       . gethostname().microtime());
   }
 }
