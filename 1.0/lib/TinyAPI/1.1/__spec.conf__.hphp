@@ -1,0 +1,8 @@
+<?php
+
+$name = "TinyAPI";
+$version = "1.1";
+
+$dependencies = ["TinyCore:1.0"];
+
+

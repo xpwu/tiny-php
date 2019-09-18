@@ -17,6 +17,8 @@ use Tiny\Response;
 
 class Main {
 
+  private const _404 = 'Tiny\API\_404';
+
   static public function main() {
 
     date_default_timezone_set('PRC'); // 设置时区
@@ -69,26 +71,38 @@ class Main {
 
       Logger::getInstance()->info("start");
 
-      if (!class_exists($api)) {
-        $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
-        $response->httpStatusMsg = "API Not Found";
-      } else if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
-        Logger::getInstance()->info("OPTIONS method");
-        $response->httpHeaders["Access-Control-Allow-Origin"] = "*";
-        $response->httpHeaders["Access-Control-Max-Age"] = 24 * 3600;
-        $response->httpHeaders["Access-Control-Allow-Headers"] =
-          " accept, content-type, _t, _i, _f, _l, _s,Accept-Language,"
-          . "Content-Language,Origin, No-Cache, X-Requested-With, If-Modified-Since,"
-          . " Pragma, Last-Modified, Cache-Control, Expires, Content-Type, "
-          . "X-E4M-With,authorization,application/x-www-form-urlencoded,multipart/form-data,text/plain";
-        $response->httpHeaders["Access-Control-Allow-Methods"] = " OPTIONS, POST";
-      } else {
+      do {
+        if (!class_exists($api)) {
+          if (!class_exists(self::_404)) {
+            $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
+            $response->httpStatusMsg = "API Not Found";
+            break;
+          }
+
+          Logger::getInstance()->info("redirect to api: " . self::_404);
+          $api = self::_404;
+        }
+
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
+          Logger::getInstance()->info("OPTIONS method");
+          $response->httpHeaders["Access-Control-Allow-Origin"] = "*";
+          $response->httpHeaders["Access-Control-Max-Age"] = 24 * 3600;
+          $response->httpHeaders["Access-Control-Allow-Headers"] =
+            " accept, content-type, _t, _i, _f, _l, _s,Accept-Language,"
+            . "Content-Language,Origin, No-Cache, X-Requested-With, If-Modified-Since,"
+            . " Pragma, Last-Modified, Cache-Control, Expires, Content-Type, "
+            . "X-E4M-With,authorization,application/x-www-form-urlencoded,multipart/form-data,text/plain";
+          $response->httpHeaders["Access-Control-Allow-Methods"] = " OPTIONS, POST";
+          break;
+        }
+
         /**
          * @var $api API
          */
         $api = new $api;
         $api->process($request, $response);
-      }
+      }while(false);
+
     } catch (\Exception $e) {
       $response->httpStatus = \Tiny\HttpStatus::FAILED;
       $response->httpStatusMsg = "PHP Run Error";
