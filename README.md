@@ -21,6 +21,9 @@ tiny-php 是一个为PHP写服务的一些基础库，在此基础库上可以�
 \Tiny\API还有两个辅助方法：beforeRun afterRun，可在run执行的前后做一些处理，比如JsonApi 就用于编解码工作。   
 API的请求参数用Request对象传递，其中data就是POST的数据；处理的结果使用Response传递，其中的data就是返回的数据。  
   
+404处理：
+默认情况下，如果API对应的类没有找到，直接返回404。如果业务需要处理404的情况，可以实现一个特殊的API` Tiny\API\_404 `类，在此API中处理404的业务。
+  
 错误日志的位置在php.ini的`error_log`项目配置，如果没有配置此项，默认为phar同级的error.log文件。
 
 ##### <a name="Config"></a>配置
