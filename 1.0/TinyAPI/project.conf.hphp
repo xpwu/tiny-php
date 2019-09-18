@@ -22,6 +22,6 @@ $dependencies = ['TinyCore:1.0'];
 $publish = [
   'repo'=> "../lib",
   'name'=> "TinyAPI",
-  'version'=>"1.0"
+  'version'=>"1.1"
 ];
 
