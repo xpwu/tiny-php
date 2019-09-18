@@ -72,6 +72,16 @@ class Main {
       if (!class_exists($api)) {
         $response->httpStatus = \Tiny\HttpStatus::NOT_FOUND;
         $response->httpStatusMsg = "API Not Found";
+      } else if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
+        Logger::getInstance()->info("OPTIONS method");
+        $response->httpHeaders["Access-Control-Allow-Origin"] = "*";
+        $response->httpHeaders["Access-Control-Max-Age"] = 24 * 3600;
+        $response->httpHeaders["Access-Control-Allow-Headers"] =
+          " accept, content-type, _t, _i, _f, _l, _s,Accept-Language,"
+          . "Content-Language,Origin, No-Cache, X-Requested-With, If-Modified-Since,"
+          . " Pragma, Last-Modified, Cache-Control, Expires, Content-Type, "
+          . "X-E4M-With,authorization,application/x-www-form-urlencoded,multipart/form-data,text/plain";
+        $response->httpHeaders["Access-Control-Allow-Methods"] = " OPTIONS, POST";
       } else {
         /**
          * @var $api API
